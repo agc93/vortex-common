@@ -3,12 +3,18 @@ import { IDiscoveryResult, ProgressDelegate } from "vortex-api/lib/types/api";
 import { fs, log } from 'vortex-api';
 import { InstructionType, IInstruction } from 'vortex-api/lib/extensions/mod_management/types/IInstallResult';
 
+/**
+ * A simple class to encapsulate some commonly-used parts of a game extension for a UE-based game
+ *
+ * @remarks
+ * You need to provide a valid gameId at instantiation or it will fail in weird ways.
+ */
 export class UnrealGameHelper {
     gameId: string;
     enableFallback: boolean;
     private modFileExt: string;
     /**
-     *
+     * Creates a new helper for the given gameId.
      */
     constructor(gameId: string, enableFallback?: boolean) {
         this.modFileExt = '.pak';
@@ -16,10 +22,25 @@ export class UnrealGameHelper {
         this.enableFallback = enableFallback ?? false;
     }
 
+    /**
+     * An implementation of the `setup` pattern for UE-based games
+     * 
+     * @remarks
+     * - relativePath will usually be the result of, for example, `path.join('Game', 'Content', 'Paks', '~mods')`
+     * 
+     * @param discovery The discovery result
+     * @param relativePath The relative path to the mods folder.
+     */
     async prepareforModding(discovery: IDiscoveryResult, relativePath: string): Promise<void> {
         return fs.ensureDirWritableAsync(path.join(discovery.path, relativePath));
     }
 
+    /**
+     * An implementation of the installer test function for the UnrealGameHelper.installContent installer.
+     * 
+     * @param files The files list
+     * @param gameId The current gameId
+     */
     testSupportedContent(files: string[], gameId: string) {
         // Make sure we're able to support this mod.
         let supported = (gameId === this.gameId) &&
