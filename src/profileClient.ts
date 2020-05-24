@@ -19,9 +19,10 @@ export class ProfileClient {
             ? (ctx as IExtensionApi).store
             : ctx as ThunkStore<any>;
         this.state = this.store.getState();
+        this.getProfileSetting = this.getProfileSetting.bind(this);
     }
 
-    setProfileSetting<TSetting>(profile: IProfile, key: string, value: TSetting) {
+    setProfileSetting = <TSetting>(profile: IProfile, key: string, value: TSetting) => {
         var profileId = selectors.activeProfile(this.state)?.id
         if (profileId !== undefined && this.state.persistent.profiles[profileId].features !== undefined) {
             this.store.dispatch(actions.setFeature(profileId, key, value));
