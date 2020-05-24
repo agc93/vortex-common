@@ -10,16 +10,16 @@ import { InstructionType, IInstruction } from 'vortex-api/lib/extensions/mod_man
  * You need to provide a valid gameId at instantiation or it will fail in weird ways.
  */
 export class UnrealGameHelper {
-    gameId: string;
-    enableFallback: boolean;
+    public targetGameId: string;
+    public enableFallback: () => boolean;
     private modFileExt: string;
     /**
      * Creates a new helper for the given gameId.
      */
     constructor(gameId: string, enableFallback?: boolean) {
         this.modFileExt = '.pak';
-        this.gameId = gameId;
-        this.enableFallback = enableFallback ?? false;
+        this.targetGameId = gameId;
+        this.enableFallback = () => enableFallback ?? false;
     }
 
     /**
@@ -31,7 +31,7 @@ export class UnrealGameHelper {
      * @param discovery The discovery result
      * @param relativePath The relative path to the mods folder.
      */
-    async prepareforModding(discovery: IDiscoveryResult, relativePath: string): Promise<void> {
+    prepareforModding = async (discovery: IDiscoveryResult, relativePath: string): Promise<void> => {
         return fs.ensureDirWritableAsync(path.join(discovery.path, relativePath));
     }
 
@@ -41,9 +41,10 @@ export class UnrealGameHelper {
      * @param files The files list
      * @param gameId The current gameId
      */
-    testSupportedContent(files: string[], gameId: string) {
+    testSupportedContent = (files: string[], gameId: string) => {
         // Make sure we're able to support this mod.
-        let supported = (gameId === this.gameId) &&
+        log('debug', `testing ${files.length} mod files for unreal installer`, {files, targetGame: this.targetGameId});
+        let supported = (gameId === this.targetGameId) &&
             (files.find(file => path.extname(file).toLowerCase() === this.modFileExt) !== undefined);
 
         if (supported && files.find(file =>
@@ -58,8 +59,8 @@ export class UnrealGameHelper {
         });
     }
 
-    async installContent(files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate) {
-        log('debug', `running acevortex installer. [${gameId}]`, { files, destinationPath });
+    installContent = async (files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate) => {
+        log('debug', `running unreal installer. [${gameId}]`, { files, destinationPath });
         //basically need to keep descending until we find a reliable indicator of mod root
         const modFile = files.find(file => path.extname(file).toLowerCase() === this.modFileExt);
         if (modFile) {
@@ -83,7 +84,7 @@ export class UnrealGameHelper {
             });
             return Promise.resolve({ instructions });
         } else {
-            if (this.enableFallback) {
+            if (this.enableFallback?.()) {
                 log('warn', "Couldn't find reliable root indicator in file list. Falling back to basic installation!");
                 var instructions = files.map((file: string): IInstruction => {
                     return {

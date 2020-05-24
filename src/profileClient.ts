@@ -5,7 +5,12 @@ export class ProfileClient {
     state: IState;
     store: ThunkStore<any>;
     /**
-     *
+     * Creates a new instance of the profile client.
+     * 
+     * @remarks
+     * - Using the store param directly is *strongly* recommended over providing the IExtensionApi object!
+     * 
+     * @param store The state store object (usually from IExtensionApi.store)
      */
     constructor(store: ThunkStore<any>);
     constructor(context: IExtensionApi);
