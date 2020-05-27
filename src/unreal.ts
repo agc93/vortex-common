@@ -11,6 +11,13 @@ import { InstructionType, IInstruction } from 'vortex-api/lib/extensions/mod_man
  */
 export class UnrealGameHelper {
     public targetGameId: string;
+    /**
+     * This callback is used to determine whether the installer will try and install mods that don't look *quite* right.
+     * 
+     * @remarks
+     * - Essentially, if this callback returns true (defaults to false), the installer will still attempt to install mod files even if it can't find the `.pak` file.
+     * - This *shouldn't* be possible since the installer checks for a `.pak` file but weirder things have happened.
+     */
     public enableFallback: () => boolean;
     private modFileExt: string;
     /**
@@ -59,6 +66,14 @@ export class UnrealGameHelper {
         });
     }
 
+    /**
+     * A simple installer for UE games that deploys files rooted to the first `.pak` file into the default location.
+     * 
+     * @param files The file list
+     * @param destinationPath The installation destination path.
+     * @param gameId The ID of the game to install for
+     * @param progressDelegate [NOT USED] Callback for reporting installation progress
+     */
     installContent = async (files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate) => {
         log('debug', `running unreal installer. [${gameId}]`, { files, destinationPath });
         //basically need to keep descending until we find a reliable indicator of mod root

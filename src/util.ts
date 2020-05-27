@@ -1,5 +1,6 @@
 import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction } from "vortex-api/lib/types/api";
 import { selectors } from "vortex-api";
+import path = require("path");
 
 export function isActiveGame(api: IExtensionApi, gameId: string): boolean;
 export function isActiveGame(context: IExtensionContext, gameId: string): boolean;
@@ -21,4 +22,9 @@ export function toInstructions(attributes: { [key: string]: any }) : IInstructio
             value: attributes[key]
         } as IInstruction
     });
+}
+
+export function getModName(destinationPath: string) : string {
+    var modName = path.basename(destinationPath).split('.').slice(0, -1).join('.');
+    return modName;
 }
