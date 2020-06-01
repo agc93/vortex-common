@@ -60,4 +60,5 @@ context.registerInstaller(
 
 - 0.0.1: Initial release
 - 0.0.2: *BREAKING* - Refactor UE helper to fix scoping issues
-- 0.0.3: Refactor ProfileClient to fix scoping issues
+- 0.0.4: Refactor ProfileClient to fix scoping issues
+- 0.0.5: *BREAKING* - Renamed `toInstructions` to `toAttributeInstructions`. Fixes for inconsistent installer logic. (thanks Picky!)

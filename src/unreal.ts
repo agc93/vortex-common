@@ -1,5 +1,5 @@
 import path = require('path');
-import { IDiscoveryResult, ProgressDelegate } from "vortex-api/lib/types/api";
+import { IDiscoveryResult, ProgressDelegate, IInstallResult } from "vortex-api/lib/types/api";
 import { fs, log } from 'vortex-api';
 import { InstructionType, IInstruction } from 'vortex-api/lib/extensions/mod_management/types/IInstallResult';
 
@@ -19,6 +19,14 @@ export class UnrealGameHelper {
      * - This *shouldn't* be possible since the installer checks for a `.pak` file but weirder things have happened.
      */
     public enableFallback: () => boolean;
+
+    /**
+     * DO NOT USE. This is future functionality to control fallback installer logic
+     * 
+     * @beta
+     */
+    // private fallbackInstaller: (files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate) => Promise<IInstallResult>;
+
     private modFileExt: string;
     /**
      * Creates a new helper for the given gameId.
@@ -52,13 +60,10 @@ export class UnrealGameHelper {
         // Make sure we're able to support this mod.
         log('debug', `testing ${files.length} mod files for unreal installer`, {files, targetGame: this.targetGameId});
         let supported = (gameId === this.targetGameId) &&
-            (files.find(file => path.extname(file).toLowerCase() === this.modFileExt) !== undefined);
-
-        if (supported && files.find(file =>
-            (path.basename(file).toLowerCase() === 'moduleconfig.xml')
-            && (path.basename(path.dirname(file)).toLowerCase() === 'fomod'))) {
-            supported = false;
-        }
+            (
+                (files.find(file => path.extname(file).toLowerCase() === this.modFileExt) !== undefined)
+                || this.enableFallback
+            );
 
         return Promise.resolve({
             supported,
@@ -74,7 +79,7 @@ export class UnrealGameHelper {
      * @param gameId The ID of the game to install for
      * @param progressDelegate [NOT USED] Callback for reporting installation progress
      */
-    installContent = async (files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate) => {
+    installContent = async (files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate): Promise<IInstallResult> => {
         log('debug', `running unreal installer. [${gameId}]`, { files, destinationPath });
         //basically need to keep descending until we find a reliable indicator of mod root
         const modFile = files.find(file => path.extname(file).toLowerCase() === this.modFileExt);

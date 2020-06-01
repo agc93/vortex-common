@@ -14,7 +14,7 @@ export function isActiveGame(context : IExtensionContext | IExtensionApi | Thunk
                 : (context as ThunkStore<any>)) === gameId;
 }
 
-export function toInstructions(attributes: { [key: string]: any }) : IInstruction[] {
+export function toAttributeInstructions(attributes: { [key: string]: any }) : IInstruction[] {
     return Object.keys(attributes).map((key: string) => {
         return {
             type: "attribute",
