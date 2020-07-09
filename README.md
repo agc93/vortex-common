@@ -26,7 +26,7 @@ client.setProfileSetting('some_profile_feature', 'new value');
 
 We also provide a handful of basic utility functions to cut down on boilerplate:
 
-- `toInstructions`: a simple function to convert a set of mod attributes into the appropriate `IInstruction` objects
+- `toAttributeInstructions`: a simple function to convert a set of mod attributes into the appropriate `IInstruction` objects
 - `isActiveGame` (**PREVIEW**): this preview function is intended to simplify guard clauses to only when your game is the active game.
 - `getModName`: useful for custom installers, this function will return the original mod name from the installer `destinationPath` parameter.
 
