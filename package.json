@@ -1,6 +1,6 @@
 {
   "name": "vortex-ext-common",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A set of common building blocks for Vortex game extensions",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,11 +10,6 @@
   },
   "author": "agc93",
   "license": "MIT",
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/agc93/vortex-common.git"
