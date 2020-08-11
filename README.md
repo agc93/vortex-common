@@ -30,7 +30,7 @@ We also provide a handful of basic utility functions to cut down on boilerplate:
 - `isActiveGame` (**PREVIEW**): this preview function is intended to simplify guard clauses to only when your game is the active game.
 - `getModName`: Multiple overloads for different purposes 
   - `getModName(destinationPath: string)`: useful for custom installers, this function will return the original mod name from the installer `destinationPath` parameter.
-  - `getModName(mod: IMod)`: wrapper function to return the first valid name attribute from the usual suspects (`customFileName`➡`modName`➡`logicalFileName`➡`name`)
+  - `getModName(mod: IMod)`: wrapper function to return the first valid name attribute from the usual suspects (`customFileName`>`modName`>`logicalFileName`>`name`)
 - `getCategoryName`: returns the actual _name_ of a given category since sometimes the category is just an index.
 
 
