@@ -28,7 +28,11 @@ We also provide a handful of basic utility functions to cut down on boilerplate:
 
 - `toAttributeInstructions`: a simple function to convert a set of mod attributes into the appropriate `IInstruction` objects
 - `isActiveGame` (**PREVIEW**): this preview function is intended to simplify guard clauses to only when your game is the active game.
-- `getModName`: useful for custom installers, this function will return the original mod name from the installer `destinationPath` parameter.
+- `getModName`: Multiple overloads for different purposes 
+  - `getModName(destinationPath: string)`: useful for custom installers, this function will return the original mod name from the installer `destinationPath` parameter.
+  - `getModName(mod: IMod)`: wrapper function to return the first valid name attribute from the usual suspects (`customFileName`>`modName`>`logicalFileName`>`name`)
+- `getCategoryName`: returns the actual _name_ of a given category since sometimes the category is just an index.
+
 
 ### Unreal Engine Games
 
@@ -63,3 +67,4 @@ context.registerInstaller(
 - 0.0.4: Refactor ProfileClient to fix scoping issues
 - 0.0.5: *BREAKING* - Renamed `toInstructions` to `toAttributeInstructions`. Fixes for inconsistent installer logic. (thanks Picky!)
 - 0.0.6: Fix bug in `isActiveGame` so overloads should work again
+- 0.0.7: Add `getCategoryName` and rework `getModName` to support `IMod` attributes.
