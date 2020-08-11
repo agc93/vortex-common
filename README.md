@@ -67,4 +67,4 @@ context.registerInstaller(
 - 0.0.4: Refactor ProfileClient to fix scoping issues
 - 0.0.5: *BREAKING* - Renamed `toInstructions` to `toAttributeInstructions`. Fixes for inconsistent installer logic. (thanks Picky!)
 - 0.0.6: Fix bug in `isActiveGame` so overloads should work again
-- 0.0.7: Add `getCategoryName` and rework `getModName` to support `IMod` attributes.
+- 0.0.8: Add `getCategoryName` and rework `getModName` to support `IMod` attributes.
