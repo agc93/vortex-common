@@ -68,3 +68,4 @@ context.registerInstaller(
 - 0.0.5: *BREAKING* - Renamed `toInstructions` to `toAttributeInstructions`. Fixes for inconsistent installer logic. (thanks Picky!)
 - 0.0.6: Fix bug in `isActiveGame` so overloads should work again
 - 0.0.8: Add `getCategoryName` and rework `getModName` to support `IMod` attributes.
+- 0.0.9: Add `getModType`, add `mergeStateArray` and rework `getModName` ordering
