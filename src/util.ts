@@ -45,6 +45,37 @@ export function getModName(modOrPath: IMod|string, nameFallback?: string): strin
         return modName;
     } else {
         var mod: IMod = modOrPath;
-        return util.getSafe(mod.attributes, ['customFileName'], util.getSafe(mod.attributes, ['modName'], util.getSafe(mod.attributes, ['logicalFileName'], util.getSafe(mod.attributes, ['name'], undefined)))) ?? nameFallback;
+        return util.getSafe(mod.attributes, ['customFileName'], util.getSafe(mod.attributes, ['logicalFileName'], util.getSafe(mod.attributes, ['modName'], util.getSafe(mod.attributes, ['name'], undefined)))) ?? nameFallback;
     }
+}
+
+/**
+ * Returns the mod type for the given mod (name if available, otherwise id)
+ * 
+ * @param mod The mod
+ */
+export function getModType(mod: IMod): string {
+    var modType = util.getModType(mod.type);
+    return toTitleCase(modType?.options?.name ?? modType?.typeId ?? 'default');
+}
+
+export function mergeStateArray<T>(state: IState, statePath: string[], payload: T[]) {
+    var existing = util.getSafe<T[]>(state, [...statePath], []);
+    var mergedHashes = [...new Set(existing.concat(payload))]
+    return util.merge(state, [...statePath], mergedHashes);
+}
+
+/**
+ * Title cases the given string
+ * 
+ * @param str The input string
+ * @internal
+ */
+function toTitleCase(str: string) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt: string) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
 }
