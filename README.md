@@ -69,3 +69,4 @@ context.registerInstaller(
 - 0.0.6: Fix bug in `isActiveGame` so overloads should work again
 - 0.0.8: Add `getCategoryName` and rework `getModName` to support `IMod` attributes.
 - 0.0.9: Add `getModType`, add `mergeStateArray` and rework `getModName` ordering
+- 0.0.10: Add **experimental** install helper functions and root finder. Fix missing `getModType` export.
