@@ -1,12 +1,13 @@
 {
   "name": "vortex-ext-common",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A set of common building blocks for Vortex game extensions",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "dist": "npm run build && copyfiles -f package.json README.md LICENSE ./dist/"
   },
   "author": "agc93",
   "license": "MIT",
@@ -16,10 +17,11 @@
   },
   "devDependencies": {
     "@types/node": "^12.0.10",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "copyfiles": "^2.4.0",
     "typedoc": "^0.17.4",
     "typescript": "^3.5.2",
-    "vortex-api": "github:Nexus-Mods/vortex-api",
-    "@types/redux": "^3.6.0",
-    "@types/redux-thunk": "^2.1.0"
+    "vortex-api": "github:Nexus-Mods/vortex-api"
   }
 }
