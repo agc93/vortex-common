@@ -1,4 +1,4 @@
-import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction, IState, IMod } from "vortex-api/lib/types/api";
+import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction, IState, IMod, IGame } from "vortex-api/lib/types/api";
 import { selectors, util } from "vortex-api";
 import path = require("path");
 
@@ -78,4 +78,14 @@ function toTitleCase(str: string) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
     );
+}
+
+export function getGamePath(game: IGame, state?: IState, preferExecutablePath?: boolean): string {
+    const discovery = state && state.settings.gameMode.discovered[game.id];
+    if (discovery !== undefined) {
+        var execPath = typeof game.executable === 'string' ? game.executable : game.executable();
+        return preferExecutablePath ? path.dirname(path.join(discovery.path, execPath)) : discovery.path;
+    } else {
+        return undefined;
+    }
 }
