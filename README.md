@@ -71,3 +71,4 @@ context.registerInstaller(
 - 0.0.9: Add `getModType`, add `mergeStateArray` and rework `getModName` ordering
 - ~~0.0.10: Add **experimental** install helper functions and root finder. Fix missing `getModType` export.~~
 - 0.0.11: Re-publishing of 0.0.10 to fix import paths
+- 0.0.13: Add DetailOverlay component, isGameProfile function and export some missing util functions.
