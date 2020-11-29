@@ -1,4 +1,4 @@
-import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction, IState, IMod, IGame } from "vortex-api/lib/types/api";
+import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction, IState, IMod, IGame, IProfile } from "vortex-api/lib/types/api";
 import { selectors, util } from "vortex-api";
 import path = require("path");
 
@@ -88,4 +88,18 @@ export function getGamePath(game: IGame, state?: IState, preferExecutablePath?: 
     } else {
         return undefined;
     }
+}
+
+export function isGameProfile(api: IExtensionApi, profileId: string, gameId: string): boolean;
+export function isGameProfile(context: IExtensionContext, profileId: string, gameId: string): boolean;
+export function isGameProfile(store: ThunkStore<any>, profileId: string, gameId: string): boolean;
+export function isGameProfile(state: IState, profileId: string, gameId: string): boolean;
+export function isGameProfile(context: IExtensionContext | IExtensionApi | ThunkStore<any> | IState, profileId: string, gameId: string): boolean {
+    var state: IState = (context as any).api
+        ? (context as IExtensionContext).api.store.getState()
+        : (context as any).store
+            ? (context as IExtensionApi).store.getState()
+            : (context as ThunkStore<any>);
+    var profile: IProfile = selectors.profileById(state, profileId);
+    return profile.gameId == gameId;
 }
