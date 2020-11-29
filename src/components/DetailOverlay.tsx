@@ -1,9 +1,9 @@
 import React from "react";
 import { Overlay, Popover } from "react-bootstrap";
-import { ComponentEx, tooltip } from "vortex-api";
+import { ComponentEx } from "vortex-api";
 import { TFunction } from "vortex-api/lib/types/api";
 
-interface IDetailProps {
+interface IDetailOverlayProps {
     items: string[];
     title: string;
     direction?: 'left'|'top'|'right'|'bottom';
@@ -16,30 +16,27 @@ interface IComponentState {
     open: boolean;
 }
 
-class DetailOverlay extends ComponentEx<IDetailProps, IComponentState> {
+class DetailOverlay extends ComponentEx<IDetailOverlayProps, IComponentState> {
     private mRef: Element;
-    constructor(props: IDetailProps) {
+    constructor(props: IDetailOverlayProps) {
         super(props);
-        this.state = {
-            open: false,
-        };
+        this.initState({open: false});
     }
 
     public render() {
-        const { items, t, title, center } = this.props;
-        const IconX: any = tooltip.Icon;
+        const { items, t, title, center } = this.props as IDetailOverlayProps;
         var content: JSX.Element | JSX.Element[];
         var direction = this.props.direction ?? 'left';
         if (items.length == 0) {
             return <div></div>
         } else {
             const popover = (
-                <Popover id='popover-acev-paks'>
+                <Popover>
                     <div style={{ maxHeight: 700, overflowY: 'auto' }}>
                         <p>
                             <strong>{t(title)}:</strong>
                         </p>
-                        <ul>{items.map(p => <li>{p}</li>)}</ul>
+                        <ul>{items.map((p: string) => <li>{p}</li>)}</ul>
                     </div>
                 </Popover>
             );
