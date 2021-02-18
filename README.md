@@ -76,3 +76,6 @@ context.registerInstaller(
   - Adds new `AdvancedInstaller`/`AdvancedInstallerBuilder` for a generic UE4 multi-file installer
   - Adds new typed `EventHandler` for easier event registration (experimental and incomplete)
   - Adds new shared `LoadingSpinner` component
+- 0.1.1: Fixes some bugs in v0.1.0
+  - Supported checks didn't work properly: they would always return true rather than using the returned result's `supported` value.
+  - Supported checks can now add files to `requiredFiles` and they will be aggregated in the final supported result
