@@ -1,5 +1,5 @@
 import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction, IState, IMod, IGame, IProfile } from "vortex-api/lib/types/api";
-import { selectors, util } from "vortex-api";
+import { fs, selectors, util } from "vortex-api";
 import path = require("path");
 
 export function isActiveGame(api: IExtensionApi, gameId: string): boolean;
@@ -102,4 +102,13 @@ export function isGameProfile(context: IExtensionContext | IExtensionApi | Thunk
             : (context as ThunkStore<any>);
     var profile: IProfile = selectors.profileById(state, profileId);
     return profile.gameId == gameId;
+}
+
+export function loadLanguageContent(api: IExtensionApi, ns: string, language?: string, fileName?: string) {
+    language ||= 'en';
+    fileName ||= 'language.json';
+    try {
+        var langContent = fs.readFileSync(path.join(__dirname, fileName), {encoding: 'utf-8'});
+        api.getI18n().addResources(language, ns, JSON.parse(langContent));
+    } catch {  }
 }

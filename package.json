@@ -24,8 +24,9 @@
     "copyfiles": "^2.4.0",
     "react": "^16.8.6",
     "react-bootstrap": "^0.32.4",
+    "react-i18next": "^11.7.0",
     "typedoc": "^0.17.4",
-    "typescript": "^3.5.2",
-    "vortex-api": "github:Nexus-Mods/vortex-api"
+    "typescript": "^4.1.5",
+    "vortex-api": "github:Nexus-Mods/vortex-api#25a553a"
   }
 }
