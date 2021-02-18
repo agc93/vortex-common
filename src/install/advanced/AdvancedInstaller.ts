@@ -24,16 +24,19 @@ export class AdvancedInstaller {
 
     testSupported = async (files: string[], gameId: string): Promise<ISupportedResult> => {
         log('debug', `testing ${files.length} mod files for advanced unreal installer`, {files, targetGame: this._opts.gameId});
+        var requiredFiles: string[] = [];
         let supported = (gameId === this._opts.gameId) &&
             (
                 files.find(file => path.extname(file).toLowerCase() === this._opts.modFileExt) !== undefined
             );
         if (this._supportedChecks && this._supportedChecks.length > 0) {
-            supported &&= this._supportedChecks.every(c => c(files, gameId));
+            var results = await Promise.all(this._supportedChecks.map(async c => await c(files, gameId)));
+            supported &&= results.every(r => r.supported);
+            requiredFiles.concat(results.flatMap(r => r.requiredFiles));
         }
         return Promise.resolve({
             supported,
-            requiredFiles: [],
+            requiredFiles,
         });
     }
 
