@@ -12,7 +12,7 @@ export type CompatibilityTest = {
     shortMessage: string;
 };
 
-export type InstallSupportedTest = (files: string[], gameId: string) => Promise<ISupportedResult>
+export type InstallSupportedTest = (files: string[], gameId: string, state: IState) => Promise<ISupportedResult>
 
 export type InstructionProcessor = {
     test: (state: IState) => boolean;

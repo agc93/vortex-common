@@ -17,46 +17,48 @@ export class AdvancedInstallerBuilder {
     private messages: IAdvancedInstallerMessages;
     private supportedTests: InstallSupportedTest[];
     private _fileExt: string;
+    private _rootsLimit: number;
     /**
      *
      */
-    constructor(gameId: string, modFileExt?: string) {
+    constructor(gameId: string, modFileExt?: string, warnOnFileRoots?: number) {
         this.gameId = gameId;
         this.processors = [];
         this.supportedTests = [];
         this._fileExt == modFileExt ?? '.pak';
+        this._rootsLimit = warnOnFileRoots || 9;
     }
 
-    addCompatibilityTest(testFunc: CompatibilityTest): AdvancedInstallerBuilder {
+    addCompatibilityTest = (testFunc: CompatibilityTest): AdvancedInstallerBuilder => {
         this.preTest = testFunc;
         return this;
     }
 
-    addExtender(processor: InstructionExtender, test?: (state: IState) => boolean): AdvancedInstallerBuilder {
+    addExtender = (processor: InstructionExtender, test?: (state: IState) => boolean): AdvancedInstallerBuilder => {
         var testFunc = test ? test : (state: IState) => true;
         this.processors.push({ generate: processor, test: testFunc });
         return this;
     }
 
-    addSupportedCheck(check: InstallSupportedTest): AdvancedInstallerBuilder {
+    addSupportedCheck = (check: InstallSupportedTest): AdvancedInstallerBuilder => {
         this.supportedTests.push(check);
         return this;
     }
 
-    useCustomMessages(messages: IAdvancedInstallerMessages): AdvancedInstallerBuilder {
+    useCustomMessages = (messages: IAdvancedInstallerMessages): AdvancedInstallerBuilder => {
         this.messages = messages;
         return this;
     }
 
-    build(api: IExtensionApi): AdvancedInstaller {
+    build = (): AdvancedInstaller => {
         var opts: IAdvancedInstallerOptions = {
             gameId: this.gameId,
             messages: this.messages ?? defaultMessages,
             modFileExt: this._fileExt ?? '.pak',
             preTest: this.preTest,
-            rootFolderLimit: 9
+            rootFolderLimit: this._rootsLimit
         }
-        return new AdvancedInstaller(api, opts, this.supportedTests || [], this.processors || [])
+        return new AdvancedInstaller(opts, this.supportedTests || [], this.processors || [])
     }
 }
 

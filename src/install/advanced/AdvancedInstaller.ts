@@ -1,10 +1,9 @@
-import { log } from "vortex-api";
+import { log, util } from "vortex-api";
 import { ICheckbox, IDialogResult, IExtensionApi, IInstallResult, IInstruction, ISupportedResult, ProgressDelegate } from "vortex-api/lib/types/api";
 import * as path from 'path';
 import { buildFlatInstructions, groupBy } from "./util";
 import { IAdvancedInstallerOptions, InstructionProcessor, GroupedPaths, InstallSupportedTest, CompatibilityResult } from "./types";
 import { getModName } from "../../util";
-import { preT } from "vortex-api/lib/util/i18n";
 
 
 
@@ -14,15 +13,24 @@ export class AdvancedInstaller {
     private _processors: InstructionProcessor[];
     private _supportedChecks: InstallSupportedTest[];
 
-    constructor(api: IExtensionApi, opts: IAdvancedInstallerOptions, supportedTests?: InstallSupportedTest[], processors?: InstructionProcessor[]) {
-        this._api = api;
+    constructor(opts: IAdvancedInstallerOptions, supportedTests?: InstallSupportedTest[], processors?: InstructionProcessor[]) {
         this._opts = opts;
         this._processors = processors ?? [];
         this._supportedChecks = supportedTests ?? [];
         this._opts.modFileExt ??= '.pak';
     }
 
+    configure = (api: IExtensionApi): AdvancedInstaller => {
+        this._api = api;
+        return this;
+    }
+
     testSupported = async (files: string[], gameId: string): Promise<ISupportedResult> => {
+        if (!this._api) {
+            log('warn', 'advanced installer has not been configured! bailing out.');
+            return Promise.resolve({supported: false, requiredFiles: []});
+        }
+        var state = this._api.getState();
         log('debug', `testing ${files.length} mod files for advanced unreal installer`, {files, targetGame: this._opts.gameId});
         var requiredFiles: string[] = [];
         let supported = (gameId === this._opts.gameId) &&
@@ -30,7 +38,7 @@ export class AdvancedInstaller {
                 files.find(file => path.extname(file).toLowerCase() === this._opts.modFileExt) !== undefined
             );
         if (this._supportedChecks && this._supportedChecks.length > 0) {
-            var results = await Promise.all(this._supportedChecks.map(async c => await c(files, gameId)));
+            var results = await Promise.all(this._supportedChecks.map(async c => await c(files, gameId, state)));
             supported &&= results.every(r => r.supported);
             requiredFiles.concat(results.flatMap(r => r.requiredFiles));
         }
@@ -67,12 +75,15 @@ export class AdvancedInstaller {
                     throw new Error("Incompatible mod structure");
                 }
             } else if (preTestResult == CompatibilityResult.Invalid) {
-                throw new Error("Mod failed compatibility check! Ensure the mod file is compatible with the current game and try again.")
+                var errMessage = this._opts?.preTest?.message || "Ensure the mod file is compatible with the current game and try again.";
+                throw new Error(`Mod failed compatibility check! ${errMessage}`)
             }
         }
         let installInstructions: IInstruction[] = [];
         var keys = Object.keys(uniquePakRoots);
-        if (allPaks.length > 100 || keys.length > 9) {
+        this._opts.rootFolderLimit ||= 0;
+        var limit = this._opts.rootFolderLimit || 0;
+        if (allPaks.length > 100 || (limit > 0 && keys.length > limit)) {
             var confirmResult: IDialogResult = await this._api.showDialog('info', 'Large mod detected!', {
                 text: this._opts.messages.largeModWarning
             }, [
@@ -80,7 +91,7 @@ export class AdvancedInstaller {
                 { label: 'Continue' }
             ]);
             if (confirmResult.action == 'Cancel') {
-                return Promise.reject();
+                return Promise.reject(new util.UserCanceled());
             }
         }
         log('debug', 'separated pak roots', { roots: keys });
