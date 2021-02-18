@@ -72,3 +72,7 @@ context.registerInstaller(
 - ~~0.0.10: Add **experimental** install helper functions and root finder. Fix missing `getModType` export.~~
 - 0.0.11: Re-publishing of 0.0.10 to fix import paths
 - 0.0.14: Add DetailOverlay component, isGameProfile function and export some missing util functions.
+- 0.1.0: Adds new classes for a generic UE4 multi-file installer, 
+  - Adds new `AdvancedInstaller`/`AdvancedInstallerBuilder` for a generic UE4 multi-file installer
+  - Adds new typed `EventHandler` for easier event registration (experimental and incomplete)
+  - Adds new shared `LoadingSpinner` component
