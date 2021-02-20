@@ -17,12 +17,12 @@ export class EventHandler {
 
     private _didDeployListener = (handler: DidDeployEventDelegate, opts?: EventDelegateOptions): (profileId: string, deployment: { [typeId: string]: IDeployedFile[] }) => PromiseLike<void> => {
         opts ||= {name: 'deployment'};
-        if (isActiveGame(this._api, this._gameId)) {
             log('debug', `registering ${opts.name} event handler`);
-            return async (profileId: string, deployment: Deployment) => handler(profileId, deployment);
-        } else {
-            return () => Promise.resolve();
-        }
+            return async (profileId: string, deployment: Deployment) => {
+                if (isActiveGame(this._api, this._gameId)) {
+                    handler(profileId, deployment);
+                }
+            } 
         
     }
 

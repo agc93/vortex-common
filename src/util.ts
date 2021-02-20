@@ -90,6 +90,15 @@ export function getGamePath(game: IGame, state?: IState, preferExecutablePath?: 
     }
 }
 
+export function getDiscoveryPath(gameId: string, state: IState, extraRelPath?: string): string {
+    const discovery = state && state.settings.gameMode.discovered[gameId];
+    if (discovery !== undefined) {
+        return path.join(discovery.path, extraRelPath || '');
+    } else {
+        return undefined;
+    }
+}
+
 export function isGameProfile(api: IExtensionApi, profileId: string, gameId: string): boolean;
 export function isGameProfile(context: IExtensionContext, profileId: string, gameId: string): boolean;
 export function isGameProfile(store: ThunkStore<any>, profileId: string, gameId: string): boolean;
