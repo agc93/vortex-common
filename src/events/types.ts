@@ -18,6 +18,8 @@ export type ModsChangedEventDelegate = (currentMods: IGameModTable, changes: IMo
 
 export type DidDeployEventDelegate = (profileId: string, deployment: Deployment) => PromiseLike<any>;
 
+export type GameModeActivatedEventDelegate = (gameId: string) => void;
+
 export interface IGameModTable {[modId: string]: IMod;}
 
 export type Deployment = { [typeId: string]: IDeployedFile[] };

@@ -1,2 +1,2 @@
-export {IModChanges, ModsChangedEventDelegate, OnModsChangedOptions} from './types'
+export * from './types'
 export {EventHandler} from './eventHandler'

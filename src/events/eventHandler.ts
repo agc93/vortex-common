@@ -1,7 +1,7 @@
-import { log, util } from "vortex-api";
-import { IDeployedFile, IExtensionApi, IModTable } from "vortex-api/lib/types/api";
+import { log, selectors, util } from "vortex-api";
+import { IDeployedFile, IExtensionApi, IModTable, IProfile } from "vortex-api/lib/types/api";
 import { isActiveGame } from "..";
-import { Deployment, DidDeployEventDelegate, EventDelegateOptions, IGameModTable, ModsChangedEventDelegate, OnModsChangedOptions } from "./types";
+import { Deployment, DidDeployEventDelegate, EventDelegateOptions, GameModeActivatedEventDelegate, IGameModTable, ModsChangedEventDelegate, OnModsChangedOptions } from "./types";
 
 export class EventHandler {
     private _api: IExtensionApi;
@@ -15,19 +15,41 @@ export class EventHandler {
         
     }
 
+    private _isProfileGame = (profileId: string): boolean => {
+        const state = this._api.getState();
+        const profile: IProfile = selectors.profileById(state, profileId);
+        return profile?.gameId === this._gameId;
+    }
+
     private _didDeployListener = (handler: DidDeployEventDelegate, opts?: EventDelegateOptions): (profileId: string, deployment: { [typeId: string]: IDeployedFile[] }) => PromiseLike<void> => {
         opts ||= {name: 'deployment'};
             log('debug', `registering ${opts.name} event handler`);
             return async (profileId: string, deployment: Deployment) => {
-                if (isActiveGame(this._api, this._gameId)) {
-                    handler(profileId, deployment);
+                if (this._isProfileGame(profileId)) {
+                    await handler(profileId, deployment);
                 }
             } 
         
     }
 
-    didDeploy = (api: IExtensionApi, handler: DidDeployEventDelegate, opts?: EventDelegateOptions) : void => {
-        api.onAsync('did-deploy', this._didDeployListener(handler));
+    didDeploy = (handler: DidDeployEventDelegate, opts?: EventDelegateOptions) : EventHandler => {
+        this._api.onAsync('did-deploy', this._didDeployListener(handler, opts));
+        return this;
+    }
+
+    private _gameModeActivatedListener = (handler: GameModeActivatedEventDelegate, opts?: EventDelegateOptions) : (gameId: string) => void => {
+        opts ||= {name: 'gamemode-activated'};
+        log('debug', `registering ${opts.name} event handler`);
+        return async (gameId: string) => {
+            if (gameId === this._gameId) {
+                handler(gameId);
+            }
+        } 
+    }
+
+    gameModeActivated = (handler: GameModeActivatedEventDelegate, opts?: EventDelegateOptions) : EventHandler => {
+        this._api.events.on('gamemode-activated', this._gameModeActivatedListener(handler, opts));
+        return this;
     }
 
     onGameModsChanged = (handler: ModsChangedEventDelegate, callback?: (err: Error) => void, opts?: OnModsChangedOptions): (oldValue: IGameModTable, newValue: IGameModTable) => void => {
