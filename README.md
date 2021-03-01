@@ -79,3 +79,7 @@ context.registerInstaller(
 - 0.1.1: Fixes some bugs in v0.1.0
   - Supported checks didn't work properly: they would always return true rather than using the returned result's `supported` value.
   - Supported checks can now add files to `requiredFiles` and they will be aggregated in the final supported result
+- 0.1.2: Fix more bugs in v0.1.0/v0.1.1
+  - Event handler didn't work properly for some events, added new events
+  - Added new handler for migrations to simplify boilerplate
+  - Updated some other parts of the API, and export some missing types
