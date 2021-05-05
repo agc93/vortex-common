@@ -83,3 +83,7 @@ context.registerInstaller(
   - Event handler didn't work properly for some events, added new events
   - Added new handler for migrations to simplify boilerplate
   - Updated some other parts of the API, and export some missing types
+- 0.2.0: Add some new features and fix up a few things
+  - Add some new handlers and types for working with the FBLO API
+  - Update to newer vortex-api
+  - Update some other dependencies and clean up a few types
