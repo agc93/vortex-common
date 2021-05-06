@@ -142,7 +142,7 @@ export class AdvancedInstaller {
             ]
         );
         if (result.action == 'Cancel') {
-            return Promise.reject('Multiple mod paths located!');
+            return Promise.reject(new Error('Multiple mod paths located!'));
         } else if (result.action == 'Install All' || result.action == 'Install All_plural') {
             log('debug', JSON.stringify(result.input));
             let instructions: IInstruction[] = [];
@@ -178,7 +178,7 @@ export class AdvancedInstaller {
                 ]
             );
             if (pakResult.action == 'Cancel') {
-                return Promise.reject('Multiple mod paths located!');
+                return Promise.reject(new Error('Multiple mod paths located!'));
             } else if (pakResult.action == 'Install Selected') {
                 let instructions: IInstruction[] = [];
                 var modSelections: string[] = Object.keys(pakResult.input).filter(s => pakResult.input[s]);

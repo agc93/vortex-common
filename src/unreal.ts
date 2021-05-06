@@ -116,7 +116,7 @@ export class UnrealGameHelper {
                 return Promise.resolve({ instructions });
             } else {
                 log('error', "Couldn't find reliable root indicator in file list. Failing installation!");
-                return Promise.reject("Could not determine root of mod package.");
+                return Promise.reject(new Error("Could not determine root of mod package."));
             }
         }
     }
