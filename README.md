@@ -87,3 +87,5 @@ context.registerInstaller(
   - Add some new handlers and types for working with the FBLO API
   - Update to newer vortex-api
   - Update some other dependencies and clean up a few types
+- 0.2.1: Fix some bugs in v0.2.0
+  - Add missing error object to Promise rejections in UE4 installer
