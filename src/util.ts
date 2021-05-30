@@ -2,18 +2,25 @@ import { IExtensionContext, ThunkStore, IExtensionApi, IInstruction, IState, IMo
 import { fs, selectors, util } from "vortex-api";
 import path = require("path");
 
+/**
+ * Checks whether a given game is the currently managed game.
+ * 
+ * @param api The extension API object.
+ * @param gameId The game ID to check.
+ */
 export function isActiveGame(api: IExtensionApi, gameId: string): boolean;
 export function isActiveGame(context: IExtensionContext, gameId: string): boolean;
 export function isActiveGame(store: ThunkStore<any>, gameId: string): boolean;
 export function isActiveGame(context : IExtensionContext | IExtensionApi | ThunkStore<any>, gameId: string) : boolean {
-    return selectors.activeGameId(
-        (context as any).api 
-            ? (context as IExtensionContext).api.store.getState()
-            : (context as any).store
-                ? (context as IExtensionApi).store.getState()
-                : (context as ThunkStore<any>)) === gameId;
+    return selectors.activeGameId(getState(context)) === gameId;
 }
 
+/**
+ * Convenience function to convert an object of attributes (i.e. `{"attributeName": "value"}`) into install instructions.
+ * 
+ * @param attributes Dictionary of mod attributes to map.
+ * @returns Set of install instructions to set the required attributes.
+ */
 export function toAttributeInstructions(attributes: { [key: string]: any }) : IInstruction[] {
     return Object.keys(attributes).map((key: string) => {
         return {
@@ -24,11 +31,13 @@ export function toAttributeInstructions(attributes: { [key: string]: any }) : II
     });
 }
 
-/* export function getModName(destinationPath: string) : string {
-    var modName = path.basename(destinationPath).split('.').slice(0, -1).join('.');
-    return modName;
-} */
-
+/**
+ * Returns the actual name of a category with a given ID (such as from a mod's attributes).
+ * 
+ * @param category The category ID/attribute.
+ * @param state Application state.
+ * @returns The name of the given category, or undefined if not found.
+ */
 export function getCategoryName(category: string, state: IState) : string | undefined {
     if (!category) {
         return undefined;
@@ -37,8 +46,17 @@ export function getCategoryName(category: string, state: IState) : string | unde
     return util.getSafe(state.persistent, ['categories', gameId, category, 'name'], undefined);
 }
 
-export function getModName(destinationPath: string): string;
+/**
+ * Gets a user-friendly name for a given mod object, or installation path.
+ * @param mod The mod object to retrieve the name of.
+ * @param destinationPath The destiantion path from an installer function.
+ */
 export function getModName(mod: IMod, nameFallback?: string): string;
+/**
+ * Gets the mod name from an installation path.
+ * @param destinationPath The destination path from an installer function
+ */
+export function getModName(destinationPath: string): string;
 export function getModName(modOrPath: IMod|string, nameFallback?: string): string {
     if (typeof modOrPath == "string") {
         var modName = path.basename(modOrPath).split('.').slice(0, -1).join('.');
@@ -53,6 +71,7 @@ export function getModName(modOrPath: IMod|string, nameFallback?: string): strin
  * Returns the mod type for the given mod (name if available, otherwise id)
  * 
  * @param mod The mod
+ * @returns The mod type's name if available, otherwise the mod type's ID, otherwise 'default'.
  */
 export function getModType(mod: IMod): string {
     var modType = util.getModType(mod.type);
@@ -80,6 +99,15 @@ function toTitleCase(str: string) {
     );
 }
 
+/**
+ * Returns the current installation path for a given game.
+ * 
+ * @remarks This returns the actual game installation folder, not the staging folder.
+ * @param game The game object to retrieve the path for.
+ * @param state The app state
+ * @param preferExecutablePath Whether to prefer the path to the game executable, or just the game directory.
+ * @returns The requested game (or executable) path if available, or undefined.
+ */
 export function getGamePath(game: IGame, state?: IState, preferExecutablePath?: boolean): string {
     const discovery = state && state.settings.gameMode.discovered[game.id];
     if (discovery !== undefined) {
@@ -90,6 +118,15 @@ export function getGamePath(game: IGame, state?: IState, preferExecutablePath?: 
     }
 }
 
+/**
+ * Returns the current discoverd location for a given game.
+ * 
+ * @remarks This returns the actual game installation folder, not the staging folder.
+ * @param game The game ID to retrieve the path for.
+ * @param state The app state
+ * @param extraRelPath An additional *relative* path to append to the discovered path.
+ * @returns The requested game (or executable) path if available, or undefined.
+ */
 export function getDiscoveryPath(gameId: string, state: IState, extraRelPath?: string): string {
     const discovery = state && state.settings.gameMode.discovered[gameId];
     if (discovery !== undefined) {
@@ -99,16 +136,17 @@ export function getDiscoveryPath(gameId: string, state: IState, extraRelPath?: s
     }
 }
 
+/**
+ * Checks if the given profile is a profile for the given game ID.
+ * @param api The extension API.
+ * @param profileId The ID of the profile to check.
+ * @param gameId The game ID to check against.
+ */
 export function isGameProfile(api: IExtensionApi, profileId: string, gameId: string): boolean;
-export function isGameProfile(context: IExtensionContext, profileId: string, gameId: string): boolean;
 export function isGameProfile(store: ThunkStore<any>, profileId: string, gameId: string): boolean;
 export function isGameProfile(state: IState, profileId: string, gameId: string): boolean;
 export function isGameProfile(context: IExtensionContext | IExtensionApi | ThunkStore<any> | IState, profileId: string, gameId: string): boolean {
-    var state: IState = (context as any).api
-        ? (context as IExtensionContext).api.store.getState()
-        : (context as any).store
-            ? (context as IExtensionApi).store.getState()
-            : (context as ThunkStore<any>);
+    var state: IState = getState(context);
     var profile: IProfile = selectors.profileById(state, profileId);
     return profile.gameId == gameId;
 }
@@ -120,4 +158,37 @@ export function loadLanguageContent(api: IExtensionApi, ns: string, language?: s
         var langContent = fs.readFileSync(path.join(__dirname, fileName), {encoding: 'utf-8'});
         api.getI18n().addResources(language, ns, JSON.parse(langContent));
     } catch {  }
+}
+
+/**
+ * Checks if the given mod ID corresponds to a Nexus Mods-sourced mod.
+ * 
+ * @param api The extension API.
+ * @param modId The mod ID.
+ * @returns 'true' if the mod is a Nexus-sourced mod, otherwise false.
+ */
+export function isNexusMod(api: IExtensionApi, modId: string): boolean {
+    const state: IState = api.store.getState();
+    const gameMode = selectors.activeGameId(state);
+
+    let modSource = util.getSafe(state.persistent.mods,
+                            [gameMode, modId, 'attributes', 'source'],
+                            undefined);
+    if (modSource === undefined) {
+      modSource = util.getSafe(state.persistent.downloads,
+                          ['files', modId, 'modInfo', 'source'],
+                          undefined);
+    }
+
+    return modSource === 'nexus';
+}
+
+
+function getState(obj: IExtensionContext | IExtensionApi | IState | ThunkStore<any>): IState {
+    var state: IState = (obj as any).api
+        ? (obj as IExtensionContext).api.store.getState()
+        : (obj as any).store
+            ? (obj as IExtensionApi).store.getState()
+            : (obj as ThunkStore<any>);
+    return state;
 }

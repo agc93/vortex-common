@@ -2,6 +2,15 @@ import { util } from "vortex-api";
 import { IDialogContent, IDialogResult, IExtensionApi } from "vortex-api/lib/types/api";
 import { ExtensionUpdateInfo } from "./types";
 
+/**
+ * Shows a notification warning users that an updated extension version requires a specific version of Vortex.
+ * 
+ * @param api The extension API.
+ * @param extInfo The extension update this notification is referencing.
+ * @param message The message to show to users in the details dialog.
+ * @param callback A callback to run *after* the dialog is closed.
+ * @returns The notification ID.
+ */
 export function requireVortexVersionNotification(api: IExtensionApi, extInfo: ExtensionUpdateInfo, message: string, callback?: () => void) {
     return api.sendNotification({
         id: 'extension-requires-upgrade',
@@ -35,7 +44,14 @@ export function requireVortexVersionNotification(api: IExtensionApi, extInfo: Ex
     });
 }
 
-// make message either an IDialogContent or a string and handle either scenario
+/**
+ * Shows a dialog informing a user that an extension has been updated and optionally providing a link to release notes.
+ * 
+ * @param api The extension API.
+ * @param extInfo The extension update this dialog is referencing.
+ * @param message A simple message (or dialog contents) to show to users.
+ * @param callback A callback to run *after* the dialog is closed.
+ */
 export function showUpgradeDialog(api: IExtensionApi, extInfo: ExtensionUpdateInfo, message: string|IDialogContent, callback?: () => void): Promise<IDialogResult> {
     var actions = []
     var title = `${extInfo.name} updated to v${extInfo.newVersion}`
@@ -53,6 +69,15 @@ export function showUpgradeDialog(api: IExtensionApi, extInfo: ExtensionUpdateIn
     }
 }
 
+/**
+ * Shows a simple upgrade notification to users when the migration runs, with an optional (to the user) dialog to provide more details on the update.
+ * 
+ * @param api The extension API.
+ * @param extInfo The extension update this notification is referencing.
+ * @param message A simple message (or dialog contents) to show to users in the details dialog.
+ * @param callback A callback to run *after* the dialog is closed.
+ * @returns A Promise that resolves when the notification or dialog is dismissed.
+ */
 export function showUpgradeNotification(api: IExtensionApi, extInfo: ExtensionUpdateInfo, message: string|IDialogContent, callback?: () => void): Promise<void> {
     return new Promise((resolve) => {
         return api.sendNotification({

@@ -28,8 +28,12 @@ export class UnrealGameHelper {
     // private fallbackInstaller: (files: string[], destinationPath: string, gameId: string, progressDelegate: ProgressDelegate) => Promise<IInstallResult>;
 
     private modFileExt: string;
+    
     /**
      * Creates a new helper for the given gameId.
+     * 
+     * @param gameId The game ID for this helper
+     * @param enableFallback Whether to enable fallback install behaviour. Currently unused.
      */
     constructor(gameId: string, enableFallback?: boolean) {
         this.modFileExt = '.pak';

@@ -3,11 +3,18 @@ import { IDeployedFile, IExtensionApi, IModTable, IProfile } from "vortex-api/li
 import { isActiveGame } from "..";
 import { Deployment, DidDeployEventDelegate, EventDelegateOptions, GameModeActivatedEventDelegate, IGameModTable, ModsChangedEventDelegate, OnModsChangedOptions } from "./types";
 
+/**
+ * A handler class that can be used to register to Vortex events with less boilerplate and typed callbacks.
+ * @remarks This class is intended only for _game_ extensions.
+ */
 export class EventHandler {
     private _api: IExtensionApi;
     private _gameId: string;
     /**
-     *
+     * Creates a new EventHandler for a specific game.
+     * Any events registered using this handler will only be triggered if they are relevant to this game ID.
+     * @param api The extension API.
+     * @param gameId The game ID.
      */
     constructor(api: IExtensionApi, gameId: string) {
         this._api = api;
@@ -32,6 +39,12 @@ export class EventHandler {
         
     }
 
+    /**
+     * Registers an event handler for the 'did-deploy' event that will only run if the deployment was for this handler's game ID.
+     * @param handler The callback/handler to run.
+     * @param opts Optional object to control the event.
+     * @returns The handler (for chaining calls).
+     */
     didDeploy = (handler: DidDeployEventDelegate, opts?: EventDelegateOptions) : EventHandler => {
         this._api.onAsync('did-deploy', this._didDeployListener(handler, opts));
         return this;
@@ -47,6 +60,12 @@ export class EventHandler {
         } 
     }
 
+    /**
+     * Registers an event handler for the `gamemode-activated` event that will only run if this handler's game is being activated.
+     * @param handler The callback/handler to run.
+     * @param opts Optional object to control the event.
+     * @returns The handler (for chaining calls).
+     */
     gameModeActivated = (handler: GameModeActivatedEventDelegate, opts?: EventDelegateOptions) : EventHandler => {
         this._api.events.on('gamemode-activated', this._gameModeActivatedListener(handler, opts));
         return this;
