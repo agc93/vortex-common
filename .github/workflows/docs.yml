@@ -2,7 +2,8 @@ name: Release docs
 
 on:
   push:
-    branches: [ master ]
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
