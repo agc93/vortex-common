@@ -4,7 +4,17 @@ import { selectors, log, actions } from "vortex-api";
 /**
  * A simple wrapper class to assist with setting and retrieving profile features.
  * 
+ * You will still need to register profile features using the usual `context.registerProfileFeature` syntax, but you can then easily set/get that feature with a `ProfileClient` instance.
+ * 
  * @remarks If you are not familiar with how Vortex handles profile features, be *very careful*. This can be a minefield.
+ * 
+ * @example
+ *```typescript
+ *var client = new ProfileClient(context.api.store);
+ *var feature = client.getProfileSetting('some_profile_feature', 'default value');
+ *client.setProfileSetting('some_profile_feature', 'new value');
+ *```
+```
  */
 export class ProfileClient {
     private state: IState;

@@ -4,23 +4,15 @@ This library serves as a basic set of common building blocks/patterns for use in
 
 ## Usage
 
+Install the library into your project with `npm install --save-dev vortex-ext-common`, then import the components you want to use.
+
+Please note that we **strongly** recommend using TypeScript for Vortex extensions in general, and especially with this library. Support will only be given for TypeScript usage scenarios.
+
 ### All Games
 
-The library provides the following components for any game to use:
+The library provides many components for any game to use, but we strongly recommend relying on the tsdoc since that will be updated in line with any API changes. You can find more detailed docs at [agc93.github.io/vortex-common/](https://agc93.github.io/vortex-common/).
 
-#### `ProfileClient`
-
-The `ProfileClient` class serves as a lightweight wrapper over Vortex's profile features system. This class makes it easier to set or retrieve the value of a given profile feature for your game.
-
-> If you are not familiar with how Vortex handles profile features, be *very careful*. This can be a minefield.
-
-You will still need to register profile features using the usual `context.registerProfileFeature` syntax, but you can then easily set/get that feature with a `ProfileClient` instance:
-
-```ts
-var client = new ProfileClient(context.api.store);
-var feature = client.getProfileSetting('some_profile_feature', 'default value');
-client.setProfileSetting('some_profile_feature', 'new value');
-```
+> The docs are not fully complete, but we will be updating the missing components with proper tsdoc in the next couple of patches.
 
 #### Basic Utility Objects
 
@@ -32,6 +24,8 @@ We also provide a handful of basic utility functions to cut down on boilerplate:
   - `getModName(destinationPath: string)`: useful for custom installers, this function will return the original mod name from the installer `destinationPath` parameter.
   - `getModName(mod: IMod)`: wrapper function to return the first valid name attribute from the usual suspects (`customFileName`>`modName`>`logicalFileName`>`name`)
 - `getCategoryName`: returns the actual _name_ of a given category since sometimes the category is just an index.
+
+> There are many more functions available than these. Check [the docs](https://agc93.github.io/vortex-common/) for full details.
 
 
 ### Unreal Engine Games
@@ -59,6 +53,10 @@ context.registerInstaller(
     unreal.installContent
 );
 ```
+
+#### `LoadOrderHelper`
+
+A simple helper class to encapsulate common operations when using the new Vortex 1.4+ FBLO API with UE4 games. As always, [check the docs](https://agc93.github.io/vortex-common/) for full details.
 
 ## Changelog
 
@@ -89,3 +87,5 @@ context.registerInstaller(
   - Update some other dependencies and clean up a few types
 - 0.2.1: Fix some bugs in v0.2.0
   - Add missing error object to Promise rejections in UE4 installer
+- 0.2.2: Fix some minor bugs in v0.2.1
+  - This also adds the first batch of missing tsdoc comments. More doc will be added soon.
