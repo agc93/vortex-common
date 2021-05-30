@@ -35,6 +35,14 @@ export function makePrefix(input: number) {
     return util.pad((res as any), 'A', 3);
 }
 
+/**
+ * Creates a path prefix to represent the given mod's current load order position.
+ * 
+ * @param api The extension API.
+ * @param mod The mod to create a prefix for.
+ * @param profileId (optional) profile ID.
+ * @returns A string with an order-derived alphabetical prefix.
+ */
 export function toLOPrefix(api: types.IExtensionApi, mod: types.IMod, profileId?: string): string {
     // As mentioned previously in this guide, we chose to use an alphabetical prefix
     //  but we could simply append a numeric prefix instead. The point of this fucntion

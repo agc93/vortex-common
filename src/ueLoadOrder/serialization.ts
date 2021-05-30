@@ -3,6 +3,15 @@ import { LoadOrder } from "vortex-api/lib/extensions/file_based_loadorder/types/
 import { ILoadOrderEntry, ISerializableData, LoadOrderFilter } from "./types";
 import { ensureLOFile, getProfile, makePrefix } from "./util";
 
+/**
+ * Deserializes a load order from a load order file on disk.
+ * 
+ * @param api The extension API.
+ * @param gameId The game ID to load for.
+ * @param profileId The optional profile ID. (not currently used)
+ * @param filterFn A simple predicate to filter mods from deserialization.
+ * @returns A Promise for the deserialized load order.
+ */
 export async function deserialize(api: types.IExtensionApi, gameId: string, profileId?: string, filterFn?: LoadOrderFilter): Promise<LoadOrder> {
     /* var gameId = isGameProfile
     if (props?.profile?.gameId !== GAME_ID) {
@@ -70,6 +79,15 @@ export async function deserialize(api: types.IExtensionApi, gameId: string, prof
     }
 }
 
+/**
+ * Serializes the given load order to disk.
+ * 
+ * @param api The extension API.
+ * @param gameId The game ID to manage.
+ * @param loadOrder The load order to serialize.
+ * @param profileId The optional profile ID.
+ * @returns A promise that resolves when the LO has been serialized.
+ */
 export async function serialize(api: types.IExtensionApi, gameId: string,
     loadOrder: LoadOrder, profileId?: string): Promise<void> {
 
@@ -98,6 +116,14 @@ export async function serialize(api: types.IExtensionApi, gameId: string,
     return Promise.resolve();
 }
 
+/**
+ * Validation function for validating the load order.
+ * 
+ * @remarks No actual validation is performed in this implementation!
+ * @param prev The previous load order.
+ * @param current The current load order.
+ * @returns `undefined`: no validation is performed.
+ */
 export async function validate(prev: LoadOrder,
     current: LoadOrder): Promise<any> {
     // Nothing to validate really - the game does not read our load order file

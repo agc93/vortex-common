@@ -1,0 +1,28 @@
+name: Release docs
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm ci --ignore-scripts
+    - run: npm run build:docs
+    # - name: Make GitHub links absolute
+    #   run:
+    #     shopt -s globstar;
+    #     sed
+    #       --in-place
+    #       --expression='s:/develop/docs/:/${{ github.sha }}/docs/:g'
+    #       docs/build/**/*.html;
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./apidoc
+          # for v3.html and perhaps CNAME
+          # keep_files: true

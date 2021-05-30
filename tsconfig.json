@@ -20,5 +20,11 @@
     ],
     "include": [
         "src/**/*.ts*"
-    ]
+    ],
+    "typedocOptions": {
+        "entryPoints": ["src/index.ts", "src/migrations/index.ts", "src/events/index.ts", "src/ueLoadOrder/index.ts"],
+        "out": "apidoc",
+        "excludePrivate": true,
+
+      }
 }

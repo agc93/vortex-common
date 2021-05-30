@@ -1,9 +1,14 @@
 import { IProfile, ThunkStore, IState, IExtensionApi } from "vortex-api/lib/types/api";
 import { selectors, log, actions } from "vortex-api";
 
+/**
+ * A simple wrapper class to assist with setting and retrieving profile features.
+ * 
+ * @remarks If you are not familiar with how Vortex handles profile features, be *very careful*. This can be a minefield.
+ */
 export class ProfileClient {
-    state: IState;
-    store: ThunkStore<any>;
+    private state: IState;
+    private store: ThunkStore<any>;
     /**
      * Creates a new instance of the profile client.
      * 
@@ -22,6 +27,13 @@ export class ProfileClient {
         this.getProfileSetting = this.getProfileSetting.bind(this);
     }
 
+    /**
+     * Sets the value of a given profile feature/setting on a given profile.
+     * 
+     * @param profile The profile to set the value on.
+     * @param key The unique key for the profile feature/setting.
+     * @param value The value to set/update for the profile feature/setting.
+     */
     setProfileSetting = <TSetting>(profile: IProfile, key: string, value: TSetting) => {
         var profileId = selectors.activeProfile(this.state)?.id
         if (profileId !== undefined && this.state.persistent.profiles[profileId].features !== undefined) {
@@ -32,6 +44,13 @@ export class ProfileClient {
         }
     }
 
+    /**
+     * Retrieves the value of a given profile feature/setting on a given profile.
+     * 
+     * @param profile The profile to retreive the value from.
+     * @param key The unique key for the profile feature/setting.
+     * @param defaultValue The default value to return if the feature does not exist or does not have a value.
+     */
     getProfileSetting<TSetting>(profile: IProfile, key: string, defaultValue: TSetting) : TSetting;
     getProfileSetting<TSetting>(key: string, defaultValue: TSetting) : TSetting;
     getProfileSetting<TSetting>(profileOrKey: string | IProfile, defaultValueOrKey: string | TSetting, defaultValue?: TSetting) : TSetting {
