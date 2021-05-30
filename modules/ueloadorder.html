@@ -1,0 +1,517 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ueLoadOrder | vortex-ext-common</title>
+	<meta name="description" content="Documentation for vortex-ext-common">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">vortex-ext-common</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">vortex-ext-common</a>
+				</li>
+				<li>
+					<a href="ueloadorder.html">ueLoadOrder</a>
+				</li>
+			</ul>
+			<h1>Module ueLoadOrder</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A lightweight <em>experimental</em> wrapper/helper API over the FBLO API (in Vortex 1.4+), designed for use in UE4-based games.</p>
+					</div>
+					<p>Slightly simplifies registering and configuring Vortex&#39;s load order management for games using the &quot;default&quot; UE4 mod loading behaviour.</p>
+					<p>Import types from this module using</p>
+					<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">LoadOrderHelper</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;vortex-ext-common/ueLoadOrder&quot;</span><span style="color: #000000">;</span>
+</code></pre>
+					<dl class="tsd-comment-tags">
+						<dt>remarks</dt>
+						<dd><p>Please note that the majority of this code was adapted from the guide provided by @IDCs <a href="https://github.com/Nexus-Mods/vortex-api/issues/22">here</a></p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/ueloadorder.loadorderhelper.html" class="tsd-kind-icon">Load<wbr>Order<wbr>Helper</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-kind-icon">ILoad<wbr>Order<wbr>Entry</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/ueloadorder.iserializabledata.html" class="tsd-kind-icon">ISerializable<wbr>Data</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="ueloadorder.html#loadorderfilter" class="tsd-kind-icon">Load<wbr>Order<wbr>Filter</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ueloadorder.html#deserialize" class="tsd-kind-icon">deserialize</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ueloadorder.html#excludenondefaulttypes" class="tsd-kind-icon">exclude<wbr>Non<wbr>Default<wbr>Types</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ueloadorder.html#getloadorderinfo" class="tsd-kind-icon">get<wbr>Load<wbr>Order<wbr>Info</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ueloadorder.html#serialize" class="tsd-kind-icon">serialize</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ueloadorder.html#toloprefix" class="tsd-kind-icon">toLOPrefix</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ueloadorder.html#validate" class="tsd-kind-icon">validate</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="loadorderfilter" class="tsd-anchor"></a>
+					<h3>Load<wbr>Order<wbr>Filter</h3>
+					<div class="tsd-signature tsd-kind-icon">Load<wbr>Order<wbr>Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-signature-type" data-tsd-kind="Interface">ILoadOrderEntry</a>, mod<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">IMod</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/types.ts#L31">ueLoadOrder/types.ts:31</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-signature-type" data-tsd-kind="Interface">ILoadOrderEntry</a>, mod<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">IMod</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>value: <a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-signature-type" data-tsd-kind="Interface">ILoadOrderEntry</a></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> mod: <span class="tsd-signature-type">IMod</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="deserialize" class="tsd-anchor"></a>
+					<h3>deserialize</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">deserialize<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">types.IExtensionApi</span>, gameId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, profileId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, filterFn<span class="tsd-signature-symbol">?: </span><a href="ueloadorder.html#loadorderfilter" class="tsd-signature-type" data-tsd-kind="Type alias">LoadOrderFilter</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LoadOrder</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/serialization.ts#L15">ueLoadOrder/serialization.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Deserializes a load order from a load order file on disk.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>api: <span class="tsd-signature-type">types.IExtensionApi</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The extension API.</p>
+									</div>
+								</li>
+								<li>
+									<h5>gameId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The game ID to load for.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> profileId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The optional profile ID. (not currently used)</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filterFn: <a href="ueloadorder.html#loadorderfilter" class="tsd-signature-type" data-tsd-kind="Type alias">LoadOrderFilter</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A simple predicate to filter mods from deserialization.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LoadOrder</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A Promise for the deserialized load order.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="excludenondefaulttypes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> exclude<wbr>Non<wbr>Default<wbr>Types</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">exclude<wbr>Non<wbr>Default<wbr>Types<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-signature-type" data-tsd-kind="Interface">ILoadOrderEntry</a>, mod<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">IMod</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/filters.ts#L10">ueLoadOrder/filters.ts:10</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A simple filter to exclude all non-default mod types.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-signature-type" data-tsd-kind="Interface">ILoadOrderEntry</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> mod: <span class="tsd-signature-type">IMod</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The mod.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p><code>true</code> if the mod is the default type, otherwise <code>false</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getloadorderinfo" class="tsd-anchor"></a>
+					<h3>get<wbr>Load<wbr>Order<wbr>Info</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Load<wbr>Order<wbr>Info<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IExtensionApi</span>, gameId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, instructions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ILoadOrderGameInfo</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/handler.ts#L105">ueLoadOrder/handler.ts:105</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A simple wrapper function that can create a complete <code>ILoadOrderGameInfo</code> object ready for registration with <code>IExtensionContext.registerLoadOrder</code></p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>experimental</dt>
+									<dd></dd>
+									<dt>remarks</dt>
+									<dd><p>The returned helper will use all the default behaviours where relevant.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>api: <span class="tsd-signature-type">IExtensionApi</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The extension API.</p>
+									</div>
+								</li>
+								<li>
+									<h5>gameId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The game to manage the order for.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> instructions: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Optional instructions for the user.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ILoadOrderGameInfo</span></h4>
+							<p>A complete <code>ILoadOrderGameInfo</code> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="serialize" class="tsd-anchor"></a>
+					<h3>serialize</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">serialize<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">types.IExtensionApi</span>, gameId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, loadOrder<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LoadOrder</span>, profileId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/serialization.ts#L91">ueLoadOrder/serialization.ts:91</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Serializes the given load order to disk.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>api: <span class="tsd-signature-type">types.IExtensionApi</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The extension API.</p>
+									</div>
+								</li>
+								<li>
+									<h5>gameId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The game ID to manage.</p>
+									</div>
+								</li>
+								<li>
+									<h5>loadOrder: <span class="tsd-signature-type">LoadOrder</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The load order to serialize.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> profileId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The optional profile ID.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves when the LO has been serialized.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="toloprefix" class="tsd-anchor"></a>
+					<h3>toLOPrefix</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">toLOPrefix<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">types.IExtensionApi</span>, mod<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">types.IMod</span>, profileId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/util.ts#L46">ueLoadOrder/util.ts:46</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a path prefix to represent the given mod&#39;s current load order position.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>api: <span class="tsd-signature-type">types.IExtensionApi</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The extension API.</p>
+									</div>
+								</li>
+								<li>
+									<h5>mod: <span class="tsd-signature-type">types.IMod</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The mod to create a prefix for.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> profileId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>(optional) profile ID.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>A string with an order-derived alphabetical prefix.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="validate" class="tsd-anchor"></a>
+					<h3>validate</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>prev<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LoadOrder</span>, current<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LoadOrder</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/3511a3e/src/ueLoadOrder/serialization.ts#L127">ueLoadOrder/serialization.ts:127</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Validation function for validating the load order.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>remarks</dt>
+									<dd><p>No actual validation is performed in this implementation!</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>prev: <span class="tsd-signature-type">LoadOrder</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The previous load order.</p>
+									</div>
+								</li>
+								<li>
+									<h5>current: <span class="tsd-signature-type">LoadOrder</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The current load order.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p><code>undefined</code>: no validation is performed.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="events.html">events</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="migrations.html">migrations</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="ueloadorder.html">ue<wbr>Load<wbr>Order</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/ueloadorder.loadorderhelper.html" class="tsd-kind-icon">Load<wbr>Order<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/ueloadorder.iloadorderentry.html" class="tsd-kind-icon">ILoad<wbr>Order<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/ueloadorder.iserializabledata.html" class="tsd-kind-icon">ISerializable<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="ueloadorder.html#loadorderfilter" class="tsd-kind-icon">Load<wbr>Order<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="ueloadorder.html#deserialize" class="tsd-kind-icon">deserialize</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="ueloadorder.html#excludenondefaulttypes" class="tsd-kind-icon">exclude<wbr>Non<wbr>Default<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="ueloadorder.html#getloadorderinfo" class="tsd-kind-icon">get<wbr>Load<wbr>Order<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="ueloadorder.html#serialize" class="tsd-kind-icon">serialize</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="ueloadorder.html#toloprefix" class="tsd-kind-icon">toLOPrefix</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="ueloadorder.html#validate" class="tsd-kind-icon">validate</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

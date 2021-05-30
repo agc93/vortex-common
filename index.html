@@ -1,0 +1,219 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vortex-ext-common</title>
+	<meta name="description" content="Documentation for vortex-ext-common">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">vortex-ext-common</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>vortex-ext-common</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#vortex-extension-helper-library" id="vortex-extension-helper-library" style="color: inherit; text-decoration: none;">
+					<h1>Vortex Extension Helper Library</h1>
+				</a>
+				<p>This library serves as a basic set of common building blocks/patterns for use in building Vortex game extensions.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#all-games" id="all-games" style="color: inherit; text-decoration: none;">
+					<h3>All Games</h3>
+				</a>
+				<p>The library provides the following components for any game to use:</p>
+				<a href="#profileclient" id="profileclient" style="color: inherit; text-decoration: none;">
+					<h4><code>ProfileClient</code></h4>
+				</a>
+				<p>The <code>ProfileClient</code> class serves as a lightweight wrapper over Vortex&#39;s profile features system. This class makes it easier to set or retrieve the value of a given profile feature for your game.</p>
+				<blockquote>
+					<p>If you are not familiar with how Vortex handles profile features, be <em>very careful</em>. This can be a minefield.</p>
+				</blockquote>
+				<p>You will still need to register profile features using the usual <code>context.registerProfileFeature</code> syntax, but you can then easily set/get that feature with a <code>ProfileClient</code> instance:</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ProfileClient</span><span style="color: #000000">(</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">api</span><span style="color: #000000">.</span><span style="color: #001080">store</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">feature</span><span style="color: #000000"> = </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getProfileSetting</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;some_profile_feature&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;default value&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">setProfileSetting</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;some_profile_feature&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new value&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+				<a href="#basic-utility-objects" id="basic-utility-objects" style="color: inherit; text-decoration: none;">
+					<h4>Basic Utility Objects</h4>
+				</a>
+				<p>We also provide a handful of basic utility functions to cut down on boilerplate:</p>
+				<ul>
+					<li><code>toAttributeInstructions</code>: a simple function to convert a set of mod attributes into the appropriate <code>IInstruction</code> objects</li>
+					<li><code>isActiveGame</code> (<strong>PREVIEW</strong>): this preview function is intended to simplify guard clauses to only when your game is the active game.</li>
+					<li><code>getModName</code>: Multiple overloads for different purposes <ul>
+							<li><code>getModName(destinationPath: string)</code>: useful for custom installers, this function will return the original mod name from the installer <code>destinationPath</code> parameter.</li>
+							<li><code>getModName(mod: IMod)</code>: wrapper function to return the first valid name attribute from the usual suspects (<code>customFileName</code>&gt;<code>modName</code>&gt;<code>logicalFileName</code>&gt;<code>name</code>)</li>
+						</ul>
+					</li>
+					<li><code>getCategoryName</code>: returns the actual <em>name</em> of a given category since sometimes the category is just an index.</li>
+				</ul>
+				<a href="#unreal-engine-games" id="unreal-engine-games" style="color: inherit; text-decoration: none;">
+					<h3>Unreal Engine Games</h3>
+				</a>
+				<p>Specifically for Unreal Engine games, we provide some common building blocks that are <strong>usually</strong> common to most Unreal Engine-based games (i.e. using <code>.pak</code> files).</p>
+				<blockquote>
+					<p>Be <em>very</em> sure that the UE game you&#39;re building for is just using the usual &quot;<code>.pak</code> files in &#39;~mods&#39;&quot; pattern</p>
+				</blockquote>
+				<a href="#unrealgamehelper" id="unrealgamehelper" style="color: inherit; text-decoration: none;">
+					<h4><code>UnrealGameHelper</code></h4>
+				</a>
+				<p>This is the basic helper class for building your game extension. Instantiate it with your game&#39;s game ID, then you can use its members to simplify your extension&#39;s registration code:</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">unreal</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">UnrealGameHelper</span><span style="color: #000000">(</span><span style="color: #0070C1">GAME_ID</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">relModPath</span><span style="color: #000000"> = </span><span style="color: #001080">path</span><span style="color: #000000">.</span><span style="color: #795E26">join</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Game&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Content&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Paks&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;~mods&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #795E26">registerGame</span><span style="color: #000000">({</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">    </span><span style="color: #001080">setup</span><span style="color: #000000">: (</span><span style="color: #001080">discovery</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">unreal</span><span style="color: #000000">.</span><span style="color: #795E26">prepareForModding</span><span style="color: #000000">(</span><span style="color: #001080">discovery</span><span style="color: #000000">, </span><span style="color: #001080">relModPath</span><span style="color: #000000">);</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">});</span>
+<span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #795E26">registerInstaller</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;my-awesome-installer&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #098658">50</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">unreal</span><span style="color: #000000">.</span><span style="color: #001080">testSupportedContent</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">unreal</span><span style="color: #000000">.</span><span style="color: #001080">installContent</span>
+<span style="color: #000000">);</span>
+</code></pre>
+				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
+					<h2>Changelog</h2>
+				</a>
+				<ul>
+					<li>0.0.1: Initial release</li>
+					<li>0.0.2: <em>BREAKING</em> - Refactor UE helper to fix scoping issues</li>
+					<li>0.0.4: Refactor ProfileClient to fix scoping issues</li>
+					<li>0.0.5: <em>BREAKING</em> - Renamed <code>toInstructions</code> to <code>toAttributeInstructions</code>. Fixes for inconsistent installer logic. (thanks Picky!)</li>
+					<li>0.0.6: Fix bug in <code>isActiveGame</code> so overloads should work again</li>
+					<li>0.0.8: Add <code>getCategoryName</code> and rework <code>getModName</code> to support <code>IMod</code> attributes.</li>
+					<li>0.0.9: Add <code>getModType</code>, add <code>mergeStateArray</code> and rework <code>getModName</code> ordering</li>
+					<li><del>0.0.10: Add <strong>experimental</strong> install helper functions and root finder. Fix missing <code>getModType</code> export.</del></li>
+					<li>0.0.11: Re-publishing of 0.0.10 to fix import paths</li>
+					<li>0.0.14: Add DetailOverlay component, isGameProfile function and export some missing util functions.</li>
+					<li>0.1.0: Adds new classes for a generic UE4 multi-file installer, <ul>
+							<li>Adds new <code>AdvancedInstaller</code>/<code>AdvancedInstallerBuilder</code> for a generic UE4 multi-file installer</li>
+							<li>Adds new typed <code>EventHandler</code> for easier event registration (experimental and incomplete)</li>
+							<li>Adds new shared <code>LoadingSpinner</code> component</li>
+						</ul>
+					</li>
+					<li>0.1.1: Fixes some bugs in v0.1.0<ul>
+							<li>Supported checks didn&#39;t work properly: they would always return true rather than using the returned result&#39;s <code>supported</code> value.</li>
+							<li>Supported checks can now add files to <code>requiredFiles</code> and they will be aggregated in the final supported result</li>
+						</ul>
+					</li>
+					<li>0.1.2: Fix more bugs in v0.1.0/v0.1.1<ul>
+							<li>Event handler didn&#39;t work properly for some events, added new events</li>
+							<li>Added new handler for migrations to simplify boilerplate</li>
+							<li>Updated some other parts of the API, and export some missing types</li>
+						</ul>
+					</li>
+					<li>0.2.0: Add some new features and fix up a few things<ul>
+							<li>Add some new handlers and types for working with the FBLO API</li>
+							<li>Update to newer vortex-api</li>
+							<li>Update some other dependencies and clean up a few types</li>
+						</ul>
+					</li>
+					<li>0.2.1: Fix some bugs in v0.2.0<ul>
+							<li>Add missing error object to Promise rejections in UE4 installer</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/events.html">events</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/migrations.html">migrations</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/ueloadorder.html">ue<wbr>Load<wbr>Order</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
