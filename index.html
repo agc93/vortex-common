@@ -65,22 +65,15 @@
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
+				<p>Install the library into your project with <code>npm install --save-dev vortex-ext-common</code>, then import the components you want to use.</p>
+				<p>Please note that we <strong>strongly</strong> recommend using TypeScript for Vortex extensions in general, and especially with this library. Support will only be given for TypeScript usage scenarios.</p>
 				<a href="#all-games" id="all-games" style="color: inherit; text-decoration: none;">
 					<h3>All Games</h3>
 				</a>
-				<p>The library provides the following components for any game to use:</p>
-				<a href="#profileclient" id="profileclient" style="color: inherit; text-decoration: none;">
-					<h4><code>ProfileClient</code></h4>
-				</a>
-				<p>The <code>ProfileClient</code> class serves as a lightweight wrapper over Vortex&#39;s profile features system. This class makes it easier to set or retrieve the value of a given profile feature for your game.</p>
+				<p>The library provides many components for any game to use, but we strongly recommend relying on the tsdoc since that will be updated in line with any API changes. You can find more detailed docs at <a href="https://agc93.github.io/vortex-common/">agc93.github.io/vortex-common/</a>.</p>
 				<blockquote>
-					<p>If you are not familiar with how Vortex handles profile features, be <em>very careful</em>. This can be a minefield.</p>
+					<p>The docs are not fully complete, but we will be updating the missing components with proper tsdoc in the next couple of patches.</p>
 				</blockquote>
-				<p>You will still need to register profile features using the usual <code>context.registerProfileFeature</code> syntax, but you can then easily set/get that feature with a <code>ProfileClient</code> instance:</p>
-				<pre><code class="language-ts"><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ProfileClient</span><span style="color: #000000">(</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">api</span><span style="color: #000000">.</span><span style="color: #001080">store</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">feature</span><span style="color: #000000"> = </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getProfileSetting</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;some_profile_feature&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;default value&#039;</span><span style="color: #000000">);</span>
-<span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">setProfileSetting</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;some_profile_feature&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new value&#039;</span><span style="color: #000000">);</span>
-</code></pre>
 				<a href="#basic-utility-objects" id="basic-utility-objects" style="color: inherit; text-decoration: none;">
 					<h4>Basic Utility Objects</h4>
 				</a>
@@ -95,6 +88,9 @@
 					</li>
 					<li><code>getCategoryName</code>: returns the actual <em>name</em> of a given category since sometimes the category is just an index.</li>
 				</ul>
+				<blockquote>
+					<p>There are many more functions available than these. Check <a href="https://agc93.github.io/vortex-common/">the docs</a> for full details.</p>
+				</blockquote>
 				<a href="#unreal-engine-games" id="unreal-engine-games" style="color: inherit; text-decoration: none;">
 					<h3>Unreal Engine Games</h3>
 				</a>
@@ -120,6 +116,10 @@
 <span style="color: #000000">    </span><span style="color: #001080">unreal</span><span style="color: #000000">.</span><span style="color: #001080">installContent</span>
 <span style="color: #000000">);</span>
 </code></pre>
+				<a href="#loadorderhelper" id="loadorderhelper" style="color: inherit; text-decoration: none;">
+					<h4><code>LoadOrderHelper</code></h4>
+				</a>
+				<p>A simple helper class to encapsulate common operations when using the new Vortex 1.4+ FBLO API with UE4 games. As always, <a href="https://agc93.github.io/vortex-common/">check the docs</a> for full details.</p>
 				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
 					<h2>Changelog</h2>
 				</a>
@@ -159,6 +159,10 @@
 					</li>
 					<li>0.2.1: Fix some bugs in v0.2.0<ul>
 							<li>Add missing error object to Promise rejections in UE4 installer</li>
+						</ul>
+					</li>
+					<li>0.2.2: Fix some minor bugs in v0.2.1<ul>
+							<li>This also adds the first batch of missing tsdoc comments. More doc will be added soon.</li>
 						</ul>
 					</li>
 				</ul>

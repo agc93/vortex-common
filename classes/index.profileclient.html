@@ -73,9 +73,18 @@
 					<div class="lead">
 						<p>A simple wrapper class to assist with setting and retrieving profile features.</p>
 					</div>
+					<p>You will still need to register profile features using the usual <code>context.registerProfileFeature</code> syntax, but you can then easily set/get that feature with a <code>ProfileClient</code> instance.</p>
 					<dl class="tsd-comment-tags">
 						<dt>remarks</dt>
 						<dd><p>If you are not familiar with how Vortex handles profile features, be <em>very careful</em>. This can be a minefield.</p>
+						</dd>
+						<dt>example</dt>
+						<dd><pre><code class="language-typescript"><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ProfileClient</span><span style="color: #000000">(</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">api</span><span style="color: #000000">.</span><span style="color: #001080">store</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">feature</span><span style="color: #000000"> = </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getProfileSetting</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;some_profile_feature&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;default value&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">setProfileSetting</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;some_profile_feature&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;new value&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+							<pre><code>
+</code></pre>
 						</dd>
 					</dl>
 				</div>
@@ -121,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/1c50357/src/profileClient.ts#L11">profileClient.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/5e95e82/src/profileClient.ts#L21">profileClient.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -150,7 +159,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/1c50357/src/profileClient.ts#L20">profileClient.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/5e95e82/src/profileClient.ts#L30">profileClient.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -177,7 +186,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/1c50357/src/profileClient.ts#L54">profileClient.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/5e95e82/src/profileClient.ts#L64">profileClient.ts:64</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +226,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/1c50357/src/profileClient.ts#L55">profileClient.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/5e95e82/src/profileClient.ts#L65">profileClient.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -249,7 +258,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/1c50357/src/profileClient.ts#L37">profileClient.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/5e95e82/src/profileClient.ts#L47">profileClient.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
