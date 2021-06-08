@@ -183,6 +183,21 @@ export function isNexusMod(api: IExtensionApi, modId: string): boolean {
     return modSource === 'nexus';
 }
 
+/**
+ * Checks whether a given game ID has been managed with Vortex regardless of any mods being installed for it.
+ * 
+ * @param api The extension API.
+ * @param gameId The game ID.
+ * @returns Whether the given game is managed.
+ */
+export function isGameManaged(api: IExtensionApi, gameId: string): boolean {
+    var profiles: {[profileId: string]: IProfile} = {};
+    profiles = util.getSafe(api.getState().persistent, ['profiles'], {});
+    const gameProfiles: string[] = Object.keys(profiles)
+      .filter((id: string) => profiles[id].gameId === gameId);
+    return gameProfiles && gameProfiles.length > 0;
+}
+
 
 function getState(obj: IExtensionContext | IExtensionApi | IState | ThunkStore<any>): IState {
     var state: IState = (obj as any).api
