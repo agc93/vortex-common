@@ -22,7 +22,7 @@
         "src/**/*.ts*"
     ],
     "typedocOptions": {
-        "entryPoints": ["src/index.ts", "src/migrations/index.ts", "src/events/index.ts", "src/ueLoadOrder/index.ts"],
+        "entryPoints": ["src/index.ts", "src/migrations/index.ts", "src/events/index.ts", "src/ueLoadOrder/index.ts", "src/install/advanced/index.ts"],
         "out": "apidoc",
         "excludePrivate": true,
 

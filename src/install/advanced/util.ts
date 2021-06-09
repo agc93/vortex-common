@@ -57,13 +57,13 @@ export function addInstalledPaksAttribute(fileExt: string = '.pak'): Instruction
             .filter(i => path.extname(i.source).toLowerCase() == fileExt)
             .map(pf => pf.source);
         if (paks) {
-            return [
+            return Promise.resolve([
                 {
                     type: 'attribute',
                     key: 'installedPaks',
                     value: paks as any
                 }
-            ]
+            ])
         };
     }
 }

@@ -6,13 +6,26 @@ import { IAdvancedInstallerOptions, InstructionProcessor, GroupedPaths, InstallS
 import { getModName } from "../../util";
 
 
-
+/**
+ * A flexible and configurable installer for game extensions, especially for UE4 games.
+ * 
+ * @remarks This installer _should_ be capable of installation for non-UE4 games but we cannot provide support for that scenario.
+ */
 export class AdvancedInstaller {
     private _api: IExtensionApi;
     private _opts: IAdvancedInstallerOptions;
     private _processors: InstructionProcessor[];
     private _supportedChecks: InstallSupportedTest[];
 
+    /**
+     * Creates a new instance of the advanced installer.
+     * 
+     * @remarks It is not recommended to use this in your extension, use the {@link AdvancedInstallerBuilder} instead.
+     * 
+     * @param opts Installer options.
+     * @param supportedTests A collection of tests for supported mods.
+     * @param processors A set of processors for additional instructions.
+     */
     constructor(opts: IAdvancedInstallerOptions, supportedTests?: InstallSupportedTest[], processors?: InstructionProcessor[]) {
         this._opts = opts;
         this._processors = processors ?? [];
@@ -20,11 +33,23 @@ export class AdvancedInstaller {
         this._opts.modFileExt ??= '.pak';
     }
 
+    /**
+     * Configures the installer with the current extension API. This **must** be called during extension loading or the installer will not run.
+     * 
+     * @param api The extension API.
+     * @returns The installer.
+     */
     configure = (api: IExtensionApi): AdvancedInstaller => {
         this._api = api;
         return this;
     }
 
+    /**
+     * Tests whether the current installation operation is supported for this installer.
+     * @param files The files list.
+     * @param gameId The game ID.
+     * @returns A result for installation support.
+     */
     testSupported = async (files: string[], gameId: string): Promise<ISupportedResult> => {
         if (!this._api) {
             log('warn', 'advanced installer has not been configured! bailing out.');
@@ -48,6 +73,15 @@ export class AdvancedInstaller {
         });
     }
 
+    /**
+     * The main installer function for the advanced installer. This can be passed to `registerInstaller()`
+     * 
+     * @param files The files to install.
+     * @param destinationPath The destination path for the install.
+     * @param gameId The current game ID.
+     * @param progress A delegate for reporting progress.
+     * @returns The result of the install.
+     */
     advancedInstall = async (files: string[], destinationPath: string, gameId: string, progress: ProgressDelegate): Promise<IInstallResult> => {
         //basically need to keep descending until we find a reliable indicator of mod root
         const allPaks = files.filter(file => path.extname(file).toLowerCase() === this._opts.modFileExt);
@@ -111,8 +145,8 @@ export class AdvancedInstaller {
         }
         let instructions = installInstructions;
         for (const processor of this._processors ?? []) {
-            if (processor?.test(this._api.getState()) ?? true) {
-                instructions = instructions.concat(processor?.generate(instructions, files, getModName(destinationPath)) ?? []);
+            if ((processor?.test(this._api.getState()) ?? true) && processor) {
+                instructions = instructions.concat((await processor?.generate(instructions, files, getModName(destinationPath))) ?? []);
             }
         }
         return Promise.resolve({ instructions });
