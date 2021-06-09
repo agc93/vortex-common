@@ -16,17 +16,7 @@ The library provides many components for any game to use, but we strongly recomm
 
 #### Basic Utility Objects
 
-We also provide a handful of basic utility functions to cut down on boilerplate:
-
-- `toAttributeInstructions`: a simple function to convert a set of mod attributes into the appropriate `IInstruction` objects
-- `isActiveGame` (**PREVIEW**): this preview function is intended to simplify guard clauses to only when your game is the active game.
-- `getModName`: Multiple overloads for different purposes 
-  - `getModName(destinationPath: string)`: useful for custom installers, this function will return the original mod name from the installer `destinationPath` parameter.
-  - `getModName(mod: IMod)`: wrapper function to return the first valid name attribute from the usual suspects (`customFileName`>`modName`>`logicalFileName`>`name`)
-- `getCategoryName`: returns the actual _name_ of a given category since sometimes the category is just an index.
-
-> There are many more functions available than these. Check [the docs](https://agc93.github.io/vortex-common/) for full details.
-
+The library includes a handful of basic utility functions to cut down on boilerplate in extensions and simplify some of the more arcane Vortex APIs. Check [the docs](https://agc93.github.io/vortex-common/modules/index.html) for full details.
 
 ### Unreal Engine Games
 
@@ -56,7 +46,11 @@ context.registerInstaller(
 
 #### `LoadOrderHelper`
 
-A simple helper class to encapsulate common operations when using the new Vortex 1.4+ FBLO API with UE4 games. As always, [check the docs](https://agc93.github.io/vortex-common/) for full details.
+A simple helper class to encapsulate common operations when using the new Vortex 1.4+ FBLO API with UE4 games. As always, [check the docs](https://agc93.github.io/vortex-common/modules/ueloadorder.html) for full details.
+
+#### `AdvancedInstaller`
+
+An experimental new installer that includes interactive file choice during installation and a highly extensible and configurable design to make game-specific functionality easier to integrate. Check [the docs](https://agc93.github.io/vortex-common/modules/install_advanced.html) for more details.
 
 ## Changelog
 
@@ -89,3 +83,6 @@ A simple helper class to encapsulate common operations when using the new Vortex
   - Add missing error object to Promise rejections in UE4 installer
 - 0.2.2: Fix some minor bugs in v0.2.1
   - This also adds the first batch of missing tsdoc comments. More doc will be added soon.
+- 0.3.0: Minor update
+  - This release is a breaking change as some of the advanced installer's extension points have been made async.
+  - More parts of the API are likely to move towards async in future releases.
