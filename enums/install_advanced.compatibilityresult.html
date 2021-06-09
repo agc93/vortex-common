@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IModChanges | vortex-ext-common</title>
+	<title>CompatibilityResult | vortex-ext-common</title>
 	<meta name="description" content="Documentation for vortex-ext-common">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">vortex-ext-common</a>
 				</li>
 				<li>
-					<a href="../modules/events.html">events</a>
+					<a href="../modules/install_advanced.html">install/advanced</a>
 				</li>
 				<li>
-					<a href="events.imodchanges.html">IModChanges</a>
+					<a href="install_advanced.compatibilityresult.html">CompatibilityResult</a>
 				</li>
 			</ul>
-			<h1>Interface IModChanges</h1>
+			<h1>Enumeration CompatibilityResult</h1>
 		</div>
 	</div>
 </header>
@@ -71,51 +71,59 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>summary of the mods changed since the last event firing.</p>
+						<p>Describes the result of a compatibility test.</p>
 					</div>
+					<ul>
+						<li><code>None</code> will proceed with the installation</li>
+						<li><code>RequiresConfirmation</code> will prompt the user with a scary warning but allow for proceeding anyway</li>
+						<li><code>Invalid</code> will forcibly fail the install process.</li>
+					</ul>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">IModChanges</span>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="events.imodchanges.html#addedmods" class="tsd-kind-icon">added<wbr>Mods</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="events.imodchanges.html#removedmods" class="tsd-kind-icon">removed<wbr>Mods</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="install_advanced.compatibilityresult.html#invalid" class="tsd-kind-icon">Invalid</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="install_advanced.compatibilityresult.html#none" class="tsd-kind-icon">None</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="install_advanced.compatibilityresult.html#requiresconfirmation" class="tsd-kind-icon">Requires<wbr>Confirmation</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="addedmods" class="tsd-anchor"></a>
-					<h3>added<wbr>Mods</h3>
-					<div class="tsd-signature tsd-kind-icon">added<wbr>Mods<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IMod</span><span class="tsd-signature-symbol">[]</span></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="invalid" class="tsd-anchor"></a>
+					<h3>Invalid</h3>
+					<div class="tsd-signature tsd-kind-icon">Invalid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 2</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/643db57/src/events/types.ts#L7">events/types.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/643db57/src/install/advanced/types.ts#L13">install/advanced/types.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="removedmods" class="tsd-anchor"></a>
-					<h3>removed<wbr>Mods</h3>
-					<div class="tsd-signature tsd-kind-icon">removed<wbr>Mods<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IMod</span><span class="tsd-signature-symbol">[]</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="none" class="tsd-anchor"></a>
+					<h3>None</h3>
+					<div class="tsd-signature tsd-kind-icon">None<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/643db57/src/events/types.ts#L8">events/types.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/643db57/src/install/advanced/types.ts#L11">install/advanced/types.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="requiresconfirmation" class="tsd-anchor"></a>
+					<h3>Requires<wbr>Confirmation</h3>
+					<div class="tsd-signature tsd-kind-icon">Requires<wbr>Confirmation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/agc93/vortex-common/blob/643db57/src/install/advanced/types.ts#L12">install/advanced/types.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,13 +135,13 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/events.html">events</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/index.html">index</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/install_advanced.html">install/advanced</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -146,44 +154,44 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/events.eventhandler.html" class="tsd-kind-icon">Event<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="events.igamemodtable.html" class="tsd-kind-icon">IGame<wbr>Mod<wbr>Table</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="events.imodchanges.html" class="tsd-kind-icon">IMod<wbr>Changes</a>
+					<li class="current tsd-kind-enum tsd-parent-kind-module">
+						<a href="install_advanced.compatibilityresult.html" class="tsd-kind-icon">Compatibility<wbr>Result</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="events.imodchanges.html#addedmods" class="tsd-kind-icon">added<wbr>Mods</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="install_advanced.compatibilityresult.html#invalid" class="tsd-kind-icon">Invalid</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="events.imodchanges.html#removedmods" class="tsd-kind-icon">removed<wbr>Mods</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="install_advanced.compatibilityresult.html#none" class="tsd-kind-icon">None</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="install_advanced.compatibilityresult.html#requiresconfirmation" class="tsd-kind-icon">Requires<wbr>Confirmation</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/events.html#deployment" class="tsd-kind-icon">Deployment</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/install_advanced.advancedinstaller.html" class="tsd-kind-icon">Advanced<wbr>Installer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/install_advanced.advancedinstallerbuilder.html" class="tsd-kind-icon">Advanced<wbr>Installer<wbr>Builder</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/install_advanced.iadvancedinstallermessages.html" class="tsd-kind-icon">IAdvanced<wbr>Installer<wbr>Messages</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/events.html#diddeployeventdelegate" class="tsd-kind-icon">Did<wbr>Deploy<wbr>Event<wbr>Delegate</a>
+						<a href="../modules/install_advanced.html#compatibilitytest" class="tsd-kind-icon">Compatibility<wbr>Test</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/events.html#eventdelegateoptions" class="tsd-kind-icon">Event<wbr>Delegate<wbr>Options</a>
+						<a href="../modules/install_advanced.html#installsupportedtest" class="tsd-kind-icon">Install<wbr>Supported<wbr>Test</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/events.html#gamemodeactivatedeventdelegate" class="tsd-kind-icon">Game<wbr>Mode<wbr>Activated<wbr>Event<wbr>Delegate</a>
+						<a href="../modules/install_advanced.html#instructionextender" class="tsd-kind-icon">Instruction<wbr>Extender</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/events.html#modschangedeventdelegate" class="tsd-kind-icon">Mods<wbr>Changed<wbr>Event<wbr>Delegate</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/events.html#onmodschangedoptions" class="tsd-kind-icon">On<wbr>Mods<wbr>Changed<wbr>Options</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/install_advanced.html#addinstalledpaksattribute" class="tsd-kind-icon">add<wbr>Installed<wbr>Paks<wbr>Attribute</a>
 					</li>
 				</ul>
 			</nav>
@@ -201,11 +209,10 @@
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

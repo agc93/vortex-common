@@ -77,20 +77,7 @@
 				<a href="#basic-utility-objects" id="basic-utility-objects" style="color: inherit; text-decoration: none;">
 					<h4>Basic Utility Objects</h4>
 				</a>
-				<p>We also provide a handful of basic utility functions to cut down on boilerplate:</p>
-				<ul>
-					<li><code>toAttributeInstructions</code>: a simple function to convert a set of mod attributes into the appropriate <code>IInstruction</code> objects</li>
-					<li><code>isActiveGame</code> (<strong>PREVIEW</strong>): this preview function is intended to simplify guard clauses to only when your game is the active game.</li>
-					<li><code>getModName</code>: Multiple overloads for different purposes <ul>
-							<li><code>getModName(destinationPath: string)</code>: useful for custom installers, this function will return the original mod name from the installer <code>destinationPath</code> parameter.</li>
-							<li><code>getModName(mod: IMod)</code>: wrapper function to return the first valid name attribute from the usual suspects (<code>customFileName</code>&gt;<code>modName</code>&gt;<code>logicalFileName</code>&gt;<code>name</code>)</li>
-						</ul>
-					</li>
-					<li><code>getCategoryName</code>: returns the actual <em>name</em> of a given category since sometimes the category is just an index.</li>
-				</ul>
-				<blockquote>
-					<p>There are many more functions available than these. Check <a href="https://agc93.github.io/vortex-common/">the docs</a> for full details.</p>
-				</blockquote>
+				<p>The library includes a handful of basic utility functions to cut down on boilerplate in extensions and simplify some of the more arcane Vortex APIs. Check <a href="https://agc93.github.io/vortex-common/modules/index.html">the docs</a> for full details.</p>
 				<a href="#unreal-engine-games" id="unreal-engine-games" style="color: inherit; text-decoration: none;">
 					<h3>Unreal Engine Games</h3>
 				</a>
@@ -119,7 +106,11 @@
 				<a href="#loadorderhelper" id="loadorderhelper" style="color: inherit; text-decoration: none;">
 					<h4><code>LoadOrderHelper</code></h4>
 				</a>
-				<p>A simple helper class to encapsulate common operations when using the new Vortex 1.4+ FBLO API with UE4 games. As always, <a href="https://agc93.github.io/vortex-common/">check the docs</a> for full details.</p>
+				<p>A simple helper class to encapsulate common operations when using the new Vortex 1.4+ FBLO API with UE4 games. As always, <a href="https://agc93.github.io/vortex-common/modules/ueloadorder.html">check the docs</a> for full details.</p>
+				<a href="#advancedinstaller" id="advancedinstaller" style="color: inherit; text-decoration: none;">
+					<h4><code>AdvancedInstaller</code></h4>
+				</a>
+				<p>An experimental new installer that includes interactive file choice during installation and a highly extensible and configurable design to make game-specific functionality easier to integrate. Check <a href="https://agc93.github.io/vortex-common/modules/install_advanced.html">the docs</a> for more details.</p>
 				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
 					<h2>Changelog</h2>
 				</a>
@@ -165,6 +156,11 @@
 							<li>This also adds the first batch of missing tsdoc comments. More doc will be added soon.</li>
 						</ul>
 					</li>
+					<li>0.3.0: Minor update<ul>
+							<li>This release is a breaking change as some of the advanced installer&#39;s extension points have been made async.</li>
+							<li>More parts of the API are likely to move towards async in future releases.</li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -179,6 +175,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/install_advanced.html">install/advanced</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/migrations.html">migrations</a>
@@ -204,6 +203,9 @@
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
