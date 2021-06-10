@@ -86,3 +86,5 @@ An experimental new installer that includes interactive file choice during insta
 - 0.3.0: Minor update
   - This release is a breaking change as some of the advanced installer's extension points have been made async.
   - More parts of the API are likely to move towards async in future releases.
+- 0.3.1: Minor bugfix
+  - This release fixes a minor bug that affected the first setup of the load order file.
