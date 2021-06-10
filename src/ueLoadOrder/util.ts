@@ -12,7 +12,7 @@ export async function ensureLOFile(api: types.IExtensionApi, gameId: string, pro
     var targetPath = getDiscoveryPath(gameId, api.getState(), profile.id + '_' + fileName);
     try {
         await fs.statAsync(targetPath)
-            .catch({ code: 'ENOENT' }, () => fs.writeFileAsync(targetPath, JSON.stringify({}), { encoding: 'utf8' }));
+            .catch({ code: 'ENOENT' }, () => fs.writeFileAsync(targetPath, JSON.stringify([]), { encoding: 'utf8' }));
         return targetPath;
     } catch (err) {
         return Promise.reject(err);
