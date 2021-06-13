@@ -75,21 +75,23 @@ export function showUpgradeDialog(api: IExtensionApi, extInfo: ExtensionUpdateIn
  * @param api The extension API.
  * @param extInfo The extension update this notification is referencing.
  * @param message A simple message (or dialog contents) to show to users in the details dialog.
- * @param callback A callback to run *after* the dialog is closed.
+ * @param callback A callback to run *after* the dialog is closed (will **not** run if notification is dismissed).
  * @returns A Promise that resolves when the notification or dialog is dismissed.
  */
-export function showUpgradeNotification(api: IExtensionApi, extInfo: ExtensionUpdateInfo, message: string|IDialogContent, callback?: () => void): Promise<void> {
+export function showUpgradeNotification(api: IExtensionApi, extInfo: ExtensionUpdateInfo, message: string|IDialogContent, callback?: () => void, notificationMsg?: string): Promise<void> {
+    notificationMsg ??= `${extInfo.name} successfully updated to ${extInfo.newVersion}`;
     return new Promise((resolve) => {
         return api.sendNotification({
             id: 'beatvortex-migration',
             type: 'success',
-            message: api.translate(`${extInfo.name} successfully updated to ${extInfo.newVersion}`),
+            message: api.translate(notificationMsg),
             noDismiss: true,
             actions: [
                 {
                     title: 'More...',
                     action: (dismiss) => {
                         showUpgradeDialog(api, extInfo, message, () => {
+                            callback?.();
                             dismiss();
                             resolve();
                         });
