@@ -88,3 +88,5 @@ An experimental new installer that includes interactive file choice during insta
   - More parts of the API are likely to move towards async in future releases.
 - 0.3.1: Minor bugfix
   - This release fixes a minor bug that affected the first setup of the load order file.
+- 0.3.2: Minor API tweak
+  - Correctly handle undefined game IDs in migration handler.
