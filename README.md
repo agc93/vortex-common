@@ -93,3 +93,6 @@ An experimental new installer that includes interactive file choice during insta
 - 0.3.3: Minor fixes
   - Load order filters will now be properly applied on deserialization
   - Improve notifications for migrations helpers
+- 0.3.4: Improvements to `did-deploy` event handling
+  - Adds `setTitle` to `DidDeployEventDelegate` so handlers can update the progress text
+  - Defaults to updating the text for you when a handler provides a name
