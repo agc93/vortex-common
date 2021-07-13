@@ -66,7 +66,9 @@ export async function deserialize(api: types.IExtensionApi, gameId: string, prof
             //  but that would simply be code duplication as we need to assign prefixes
             //  during serialization anyway (otherwise user drag-drop interactions will
             //  not be saved)
-            return filteredData;
+            return filteredData.filter(entry => {
+                return filterFn(entry, entry.modId ? mods[entry.modId] : undefined);
+            });
         } else {
             api.sendNotification({
                 type: 'warning',
