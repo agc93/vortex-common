@@ -90,3 +90,6 @@ An experimental new installer that includes interactive file choice during insta
   - This release fixes a minor bug that affected the first setup of the load order file.
 - 0.3.2: Minor API tweak
   - Correctly handle undefined game IDs in migration handler.
+- 0.3.3: Minor fixes
+  - Load order filters will now be properly applied on deserialization
+  - Improve notifications for migrations helpers
