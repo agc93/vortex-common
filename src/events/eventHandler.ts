@@ -28,12 +28,15 @@ export class EventHandler {
         return profile?.gameId === this._gameId;
     }
 
-    private _didDeployListener = (handler: DidDeployEventDelegate, opts?: EventDelegateOptions): (profileId: string, deployment: { [typeId: string]: IDeployedFile[] }) => PromiseLike<void> => {
+    private _didDeployListener = (handler: DidDeployEventDelegate, opts?: EventDelegateOptions): (profileId: string, deployment: { [typeId: string]: IDeployedFile[] }, setTitle: (title: string) => void) => PromiseLike<void> => {
         opts ||= {name: 'deployment'};
             log('debug', `registering ${opts.name} event handler`);
-            return async (profileId: string, deployment: Deployment) => {
+            return async (profileId: string, deployment: Deployment, setTitle: (title: string) => void) => {
                 if (this._isProfileGame(profileId)) {
-                    await handler(profileId, deployment);
+                    if (opts.name !== 'deployment' && opts.name) {
+                        setTitle(`Running events for ${opts.name}`);
+                    }
+                    await handler(profileId, deployment, setTitle);
                 }
             } 
         

@@ -31,7 +31,7 @@ export type ModsChangedEventDelegate = (currentMods: IGameModTable, changes: IMo
 /**
  * Delegate for the `did-deploy` event (after a deployment)
  */
-export type DidDeployEventDelegate = (profileId: string, deployment: Deployment) => PromiseLike<any>;
+export type DidDeployEventDelegate = (profileId: string, deployment: Deployment, setTitle?: (title: string) => void) => PromiseLike<any>;
 
 /**
  * Delegate for the `gamemode-activated` event (when a game is activated)
