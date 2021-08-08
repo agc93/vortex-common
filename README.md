@@ -96,3 +96,7 @@ An experimental new installer that includes interactive file choice during insta
 - 0.3.4: Improvements to `did-deploy` event handling
   - Adds `setTitle` to `DidDeployEventDelegate` so handlers can update the progress text
   - Defaults to updating the text for you when a handler provides a name
+- 0.4.0: Minor UE4/FBLO update
+  - This release changes the signature for the deserialize function to use a settings object
+  - The deserialize function and helper now catch invalid load order files and can prompt to recreate the file
+  - The FBLO helper also now supports multiple filters: a file must match all of them to be included
