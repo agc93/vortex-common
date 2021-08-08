@@ -14,6 +14,7 @@ export class LoadOrderHelper {
     private _api: IExtensionApi;
     private _gameId: string;
     private _filter: LoadOrderFilter;
+    private _filters: LoadOrderFilter[] = [];
     /**
      * Creates a new instance of the helper for the specified game.
      * 
@@ -25,6 +26,7 @@ export class LoadOrderHelper {
     constructor(api: IExtensionApi, gameId: string) {
         this._api = api
         this._gameId = gameId;
+        this._filter = (val, mod) => this._filters.every(f => f(val, mod));
     }
 
     /**
@@ -34,7 +36,7 @@ export class LoadOrderHelper {
      * @returns The helper itself (for method chaining).
      */
     withFilter = (filter: LoadOrderFilter): LoadOrderHelper => {
-        this._filter = filter;
+        this._filters.push(filter);
         return this;
     }
 
@@ -66,7 +68,7 @@ export class LoadOrderHelper {
      *```
      * @returns The deserialization function.
      */
-    deserialize: () => Promise<LoadOrder> = () => deserialize(this._api, this._gameId, undefined, this._filter);
+    deserialize: () => Promise<LoadOrder> = () => deserialize(this._api, this._gameId, undefined, {filterFn: this._filter, tryRepair: true});
 
     /**
      * The validation function used when validating the "correctness" of the load order before/after serialization.

@@ -2,24 +2,34 @@ import { fs, types, util } from "vortex-api";
 import { LoadOrder } from "vortex-api/lib/extensions/file_based_loadorder/types/types";
 import { ILoadOrderEntry, ISerializableData, LoadOrderFilter } from "./types";
 import { ensureLOFile, getProfile, makePrefix } from "./util";
+import {IDialogResult} from "vortex-api/lib/types/api";
+
+export interface ILoadOrderSerializationOptions {
+    /**
+     * A simple predicate to filter mods from deserialization.
+     */
+    filterFn?: LoadOrderFilter;
+    tryRepair?: boolean;
+}
 
 /**
  * Deserializes a load order from a load order file on disk.
- * 
+ *
  * @param api The extension API.
  * @param gameId The game ID to load for.
  * @param profileId The optional profile ID. (not currently used)
- * @param filterFn A simple predicate to filter mods from deserialization.
+ * @param opts Options to control the serialization process
  * @returns A Promise for the deserialized load order.
  */
-export async function deserialize(api: types.IExtensionApi, gameId: string, profileId?: string, filterFn?: LoadOrderFilter): Promise<LoadOrder> {
+export async function deserialize(api: types.IExtensionApi, gameId: string, profileId?: string, opts?: ILoadOrderSerializationOptions): Promise<LoadOrder> {
     /* var gameId = isGameProfile
     if (props?.profile?.gameId !== GAME_ID) {
       // Why are we deserializing when the profile is invalid or belongs to
       //  another game ?
       return [];
     } */
-    filterFn ??= () => true;
+    const filterFn = opts?.filterFn ?? (() => true);
+    const tryRepair = opts?.tryRepair ?? false;
     var state = api.getState();
 
     var profile = getProfile(api, profileId);
@@ -36,7 +46,28 @@ export async function deserialize(api: types.IExtensionApi, gameId: string, prof
     const fileData = await fs.readFileAsync(loFilePath, { encoding: 'utf8' });
     try {
         if (fileData !== undefined && fileData.length > 0) {
-            const data: ILoadOrderEntry[] = JSON.parse(fileData);
+
+            let data: ILoadOrderEntry[] = undefined;
+            try {
+                data = JSON.parse(fileData);
+            } catch (err) {
+                if (tryRepair) {
+                    var result: IDialogResult = await api.showDialog('error', 'Invalid Load Order Detected', {
+                        text: "The load order file in your game directory appears to be invalid. We can recreate a new file, but you will use your current load ordering. Do you want to continue?"
+                    }, [
+                        { label: 'Cancel' },
+                        { label: 'Continue'}
+                    ]);
+                    if (result.action === "Continue") {
+                        await fs.removeAsync(loFilePath);
+                        data = [];
+                    } else {
+                        return Promise.reject(err);
+                    }
+                } else {
+                    return Promise.reject(err);
+                }
+            }
 
             // User may have disabled/removed a mod - we need to filter out any existing
             //  entries from the data we parsed.
